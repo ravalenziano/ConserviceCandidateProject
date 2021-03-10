@@ -1,0 +1,12 @@
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# SQL Server files
+*.mdf
+*.ldf
+*.ndf
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
