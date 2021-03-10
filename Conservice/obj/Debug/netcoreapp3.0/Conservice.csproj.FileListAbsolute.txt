@@ -87,4 +87,15 @@ C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\EntityFramework.SqlServer.dll
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\EntityFramework.dll
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\System.CodeDom.dll
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\System.Data.SqlClient.dll
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\runtimes\win-arm64\native\sni.dll
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\runtimes\win-x64\native\sni.dll
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\runtimes\win-x86\native\sni.dll
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Conservice.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\Humanizer.dll
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Design.dll

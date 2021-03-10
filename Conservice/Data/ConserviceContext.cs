@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Conservice.Data
 {
     public class ConserviceContext : DbContext
@@ -26,6 +27,10 @@ namespace Conservice.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Employee>().HasOne(s => s.Manager)
+            .WithMany()
+            .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Seed();
         }
