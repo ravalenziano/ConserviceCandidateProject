@@ -32,8 +32,20 @@ namespace Conservice
             services.AddDbContext<ConserviceContext>(options => options.UseSqlServer(connString));
             // Inject my services
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IReportingService, ReportingService>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+
+            //services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
+            //{
+            //    var libraryPath = Path.GetFullPath(
+            //        Path.Combine(HostEnvironment.ContentRootPath, "..", "MyClassLib"));
+            //    options.FileProviders.Add(new PhysicalFileProvider(libraryPath));
+            //});
+            //   .AddRazorPagesOptions();
+            //  services.AddMvc().AddRazorRuntimeCompilation();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -32,6 +32,23 @@ namespace Conservice.Migrations
                     b.HasKey("DepartmentId");
 
                     b.ToTable("Departments");
+
+                    b.HasData(
+                        new
+                        {
+                            DepartmentId = 1,
+                            Name = "HR"
+                        },
+                        new
+                        {
+                            DepartmentId = 2,
+                            Name = "IT"
+                        },
+                        new
+                        {
+                            DepartmentId = 3,
+                            Name = "Executive"
+                        });
                 });
 
             modelBuilder.Entity("Conservice.Data.Employee", b =>
@@ -50,13 +67,16 @@ namespace Conservice.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("EmploymentStatus")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("End")
+                    b.Property<DateTime?>("End")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ManagerId")
+                    b.Property<int?>("ManagerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -71,8 +91,11 @@ namespace Conservice.Migrations
                     b.Property<int>("PositionId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Shift")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<TimeSpan>("ShiftEnd")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("ShiftStart")
+                        .HasColumnType("time");
 
                     b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
@@ -86,6 +109,87 @@ namespace Conservice.Migrations
                     b.HasIndex("PositionId");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeId = 1,
+                            Address = "101 Fake St",
+                            Color = "Pink",
+                            DepartmentId = 1,
+                            Email = "bilbobagginsfake@gmail.com",
+                            EmploymentStatus = 0,
+                            ManagerId = 2,
+                            Name = "Bilbo Baggins",
+                            PhoneNumber = "9192342534",
+                            PositionId = 1,
+                            ShiftEnd = new TimeSpan(0, 22, 0, 0, 0),
+                            ShiftStart = new TimeSpan(0, 12, 0, 0, 0),
+                            Start = new DateTime(1995, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            EmployeeId = 2,
+                            Address = "102 Fake St",
+                            Color = "Blue",
+                            DepartmentId = 1,
+                            Email = "sallysummersfake@gmail.com",
+                            EmploymentStatus = 0,
+                            ManagerId = 3,
+                            Name = "Sally Summers",
+                            PhoneNumber = "9192353534",
+                            PositionId = 2,
+                            ShiftEnd = new TimeSpan(0, 21, 0, 0, 0),
+                            ShiftStart = new TimeSpan(0, 12, 0, 0, 0),
+                            Start = new DateTime(1995, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            EmployeeId = 3,
+                            Address = "103 Fake St",
+                            Color = "Pink",
+                            DepartmentId = 3,
+                            Email = "alexhonnoldfake@gmail.com",
+                            EmploymentStatus = 0,
+                            Name = "Alex Honnold",
+                            PhoneNumber = "9192342344",
+                            PositionId = 7,
+                            ShiftEnd = new TimeSpan(0, 22, 0, 0, 0),
+                            ShiftStart = new TimeSpan(0, 12, 0, 0, 0),
+                            Start = new DateTime(1996, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            EmployeeId = 4,
+                            Address = "104 Fake St",
+                            Color = "Blue",
+                            DepartmentId = 2,
+                            Email = "ravalenziano@gmail.com",
+                            EmploymentStatus = 0,
+                            ManagerId = 4,
+                            Name = "Richard Valenziano",
+                            PhoneNumber = "9192362344",
+                            PositionId = 3,
+                            ShiftEnd = new TimeSpan(0, 22, 0, 0, 0),
+                            ShiftStart = new TimeSpan(0, 12, 0, 0, 0),
+                            Start = new DateTime(2021, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            EmployeeId = 5,
+                            Address = "104 Fake St",
+                            Color = "Blue",
+                            DepartmentId = 2,
+                            Email = "terrytaofake@gmail.com",
+                            EmploymentStatus = 0,
+                            ManagerId = 3,
+                            Name = "Terry Tao",
+                            PhoneNumber = "9192362344",
+                            PositionId = 4,
+                            ShiftEnd = new TimeSpan(0, 22, 0, 0, 0),
+                            ShiftStart = new TimeSpan(0, 12, 0, 0, 0),
+                            Start = new DateTime(2018, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Conservice.Data.EmployeeChangeEvent", b =>
@@ -170,16 +274,36 @@ namespace Conservice.Migrations
                         new
                         {
                             PositionId = 1,
-                            Name = "HR"
+                            Name = "Recruiter"
                         },
                         new
                         {
                             PositionId = 2,
-                            Name = "IT"
+                            Name = "Senior Recruiter"
                         },
                         new
                         {
                             PositionId = 3,
+                            Name = "Developer"
+                        },
+                        new
+                        {
+                            PositionId = 4,
+                            Name = "Senior Developer"
+                        },
+                        new
+                        {
+                            PositionId = 5,
+                            Name = "CTO"
+                        },
+                        new
+                        {
+                            PositionId = 6,
+                            Name = "COO"
+                        },
+                        new
+                        {
+                            PositionId = 7,
                             Name = "CEO"
                         });
                 });
@@ -195,8 +319,7 @@ namespace Conservice.Migrations
                     b.HasOne("Conservice.Data.Employee", "Manager")
                         .WithMany()
                         .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Conservice.Data.Position", "Position")
                         .WithMany()

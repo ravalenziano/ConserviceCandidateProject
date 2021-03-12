@@ -13,7 +13,7 @@ namespace Conservice.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+      
 
         private readonly IEmployeeService _employeeService;
 
@@ -24,19 +24,106 @@ namespace Conservice.Controllers
 
         public IActionResult Index()
         {
-            List<Position> positions = _employeeService.GetPositions();
-            return View();
+            List<EmployeeViewModel> employees = _employeeService.GetEmployees();
+            return View(employees);
         }
 
-        public IActionResult Privacy()
+        public IActionResult AddEmployee()
         {
-            return View();
+            var positionOptions = _employeeService.GetPositions();
+            var departmentOptions = _employeeService.GetDepartments();
+            var managerOptions = _employeeService.GetEmployees();
+            var model = new EmployeeViewModel(positionOptions, departmentOptions, managerOptions);
+            return View(model);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Edit(int id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var employee = _employeeService.GetEmployee(id);
+            if(employee == null)
+            {
+                //TODO error
+            }
+
+            var positionOptions = _employeeService.GetPositions();
+            var departmentOptions = _employeeService.GetDepartments();
+            var managerOptions = _employeeService.GetEmployees();
+
+            return View("AddEmployee", new EmployeeViewModel(positionOptions, departmentOptions, managerOptions, employee));
         }
+
+        [HttpPost]
+        public IActionResult Edit(EmployeeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var positionOptions = _employeeService.GetPositions();
+                var departmentOptions = _employeeService.GetDepartments();
+                var managerOptions = _employeeService.GetEmployees();
+                model.InitOptions(positionOptions, departmentOptions, managerOptions);
+                return View(model);
+            }
+
+
+            // Employee  employee = _employeeService.GetEmployee(model.EmployeeId.Value);
+            Employee employee = model.ToEmployee();
+            _employeeService.SaveEmployee(employee);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult AddEmployee(EmployeeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var positionOptions = _employeeService.GetPositions();
+                var departmentOptions = _employeeService.GetDepartments();
+                var managerOptions = _employeeService.GetEmployees();
+                model.InitOptions(positionOptions, departmentOptions, managerOptions);
+                return View(model);
+            }
+            Employee employee;
+        
+                employee = model.ToEmployee();
+            
+
+            _employeeService.SaveEmployee(employee);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Permissions(int id)
+        {
+            var permissions = _employeeService.GetPermissions(id);
+            var model = new PermissionsViewModel(id, permissions);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult AddPermission(AddPermissionViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+          
+                return View(model);
+            }
+            _employeeService.AddPermission(model.EmployeeId, model.Permission);
+
+            return RedirectToAction("Permissions", new { id = model.EmployeeId });
+        }
+
+        public IActionResult RemovePermission(RemovePermissionViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+
+                return View(model);
+            }
+            _employeeService.RemovePermission(model.EmployeePermissionId);
+
+            return RedirectToAction("Permissions", new { id = model.EmployeeId });
+        }
+
+
+
     }
 }

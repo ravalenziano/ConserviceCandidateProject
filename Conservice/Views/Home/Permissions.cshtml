@@ -1,0 +1,37 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Conservice.Models.PermissionsViewModel
+
+@await Html.PartialAsync("./Shared/EmployeeTabs.cshtml")
+
+
+<h1>Permissions</h1>
+<ul>
+    @foreach (var cp in Model.CurrentPermissions)
+    {
+        <li>
+            @cp.Permission.ToString()
+
+            <form method="post" action="/Home/RemovePermission">
+                <input type="hidden" id="EmployeePermissionId" name="EmployeePermissionId" value="@cp.EmployeePermissionId">
+                <input type="hidden" id="EmployeeId" name="EmployeeId" value="@Model.EmployeeId">
+                <input type="submit" value="Remove" />
+            </form>
+
+        </li>
+    }
+</ul>
+
+
+<form method="post" action="/Home/AddPermission">
+    <input type="hidden" id="EmployeeId" name="EmployeeId" value="@Model.EmployeeId">
+    <div>
+        <label for="AddPermission" class="control-label">Add Permission:</label>
+        <select id="AddPermission" name="Permission" asp-items="Model.PermissionOptions"></select>
+    </div>
+    <input type="submit" value="Add" />
+</form>
+

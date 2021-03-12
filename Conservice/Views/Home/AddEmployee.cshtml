@@ -1,0 +1,93 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model Conservice.Models.EmployeeViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@await Html.PartialAsync("./Shared/EmployeeTabs.cshtml")
+
+<h1>Profile</h1>
+<form method="post">
+    <input type="hidden" id="EmployeeId" name="EmployeeId" value="@Model.EmployeeId">
+    <div>
+        <label asp-for="Name" class="control-label"> Name:</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Address" class="control-label"> Address:</label>
+        <input asp-for="Address" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Email" class="control-label"> Email:</label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="PhoneNumber" class="control-label"> PhoneNumber:</label>
+        <input asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="PositionId" class="control-label"> Position:</label>
+        <select asp-for="PositionId" asp-items="Model.PositionOptions"></select>
+    </div>
+
+    <div>
+        <label asp-for="DepartmentId" class="control-label"> Department:</label>
+        <select asp-for="DepartmentId" asp-items="Model.DepartmentOptions"></select>
+    </div>
+
+
+    <div>
+        <label asp-for="Start" class="control-label"> Start:</label>
+        <input type="date" asp-for="Start" />
+        <span asp-validation-for="Start" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="End" class="control-label"> End:</label>
+        <input type="date" asp-for="End" />
+        <span asp-validation-for="End" class="text-danger"></span>
+    </div>
+
+    @*TODO Employment Status Dropdown*@
+    <div>
+        <label asp-for="EmploymentStatus" class="control-label"> Employment Status:</label>
+        <select asp-for="EmploymentStatus" asp-items="Model.EmploymentStatusOptions"></select>
+    </div>
+
+    <div>
+        <label asp-for="ShiftStart" class="control-label"> ShiftStart:</label>
+        <input type="time" asp-for="ShiftStart" />
+        <span asp-validation-for="ShiftStart" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="ShiftEnd" class="control-label"> ShiftEnd:</label>
+        <input type="time" asp-for="ShiftEnd" />
+        <span asp-validation-for="ShiftEnd" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="ManagerId" class="control-label"> Manager:</label>
+        <select asp-for="ManagerId" asp-items="Model.ManagerOptions"></select>
+    </div>
+
+    <div>
+        <label asp-for="Photo" class="control-label"> Photo:</label>
+        <input asp-for="Photo" />
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Color" class="control-label"> Color:</label>
+        <input asp-for="Color" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+
+    <input type="submit" />
+</form>
+
+

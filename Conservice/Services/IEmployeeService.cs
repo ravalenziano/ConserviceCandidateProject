@@ -1,4 +1,5 @@
 ﻿using Conservice.Data;
+using Conservice.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,23 @@ namespace Conservice.Services
 {
     public interface IEmployeeService
     {
-        List<Position> GetPositions();
+        List<PositionViewModel> GetPositions();
+
+        List<EmployeeViewModel> GetEmployees();
+
+        List<DepartmentViewModel> GetDepartments();
+
+
+        void SaveEmployee(Employee employee);
+
+        Employee GetEmployee(int id);
+
+        List<EmployeeChangeEventViewModel> GetChangeEvents();
+
+        void AddPermission(int employeeId, PermissionEnum permission);
+
+        void RemovePermission(int employeePermissionId);
+
+        List<EmployeePermissionViewModel> GetPermissions(int employeeId);
     }
 }
