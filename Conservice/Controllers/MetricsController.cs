@@ -11,10 +11,11 @@ namespace Conservice.Controllers
     public class MetricsController : Controller
     {
         private readonly IReportingService _reportingService;
-
-        public MetricsController(IReportingService reportingService)
+        private readonly IEmployeeService _employeeService;
+        public MetricsController(IReportingService reportingService, IEmployeeService employeeService)
         {
             _reportingService = reportingService;
+            _employeeService = employeeService;
         }
         public IActionResult Index()
         {
@@ -33,6 +34,13 @@ namespace Conservice.Controllers
         public IActionResult ManagementChainReport()
         {
             var model = _reportingService.ManagementChainReport();
+            return View(model);
+        }
+
+        public IActionResult EmployeeCountReport()
+        {
+            var test =_employeeService.GetEmployee(1);
+            var model = _reportingService.EmployeeCountReport();
             return View(model);
         }
         

@@ -12,7 +12,7 @@ namespace Conservice.Services
 {
     public class EmployeeService : IEmployeeService
     {
-        readonly ConserviceContext _context;
+       private  readonly ConserviceContext _context;
         public EmployeeService(ConserviceContext context)
         {
             _context = context;
@@ -22,7 +22,7 @@ namespace Conservice.Services
         {
 
             List<EmployeeChangeEventViewModel> changeEvents = _context.EmployeeChangeEvents
-                .Include(x => (x as EmployeeChangeEvent).Employee)
+                .Include(x => x.Employee)
                 .OrderByDescending(x => x.Time)
                 .ToList()
                 .Select(x => new EmployeeChangeEventViewModel(x))

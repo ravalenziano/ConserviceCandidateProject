@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace Conservice.Data
 {
     public enum EmployeeChangeEventTypeEnum
@@ -21,10 +22,11 @@ namespace Conservice.Data
         public EmployeeChangeEventTypeEnum ChangeEventType { get; set; }
 
 
-        [ForeignKey("Employee")]
+        
         public int EmployeeId { get; set; }
 
-        public Employee Employee;
+        [ForeignKey("EmployeeId")]
+        public virtual Employee Employee { get; set; }
 
         public DateTime Time { get; set; }
 

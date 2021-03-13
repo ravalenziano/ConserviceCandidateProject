@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+ 
 namespace Conservice
 {
     public class Startup
@@ -29,10 +29,15 @@ namespace Conservice
             string connString = null;
             connString = Configuration.GetConnectionString("DefaultConnection");
 
-            services.AddDbContext<ConserviceContext>(options => options.UseSqlServer(connString));
+            services.AddDbContext<ConserviceContext>(options => options
+            .UseSqlServer(connString)
+            .UseLazyLoadingProxies()
+            );
             // Inject my services
+            
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IReportingService, ReportingService>();
+
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 

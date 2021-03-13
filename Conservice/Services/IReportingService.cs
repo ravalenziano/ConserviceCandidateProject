@@ -12,5 +12,7 @@ namespace Conservice.Services
         List<HireReportViewModel> HireReport();
 
         ManagementChainViewModel ManagementChainReport();
+
+        EmployeeCountViewModel EmployeeCountReport();
     }
 }

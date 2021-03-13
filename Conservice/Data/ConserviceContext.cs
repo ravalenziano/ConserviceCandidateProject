@@ -9,6 +9,10 @@ namespace Conservice.Data
 {
     public class ConserviceContext : DbContext
     {
+        public ConserviceContext()
+       : base()
+        {
+        }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeChangeEvent> EmployeeChangeEvents { get; set; }
@@ -30,11 +34,18 @@ namespace Conservice.Data
 
             modelBuilder.Entity<Employee>().HasOne(s => s.Manager)
             .WithMany()
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.ClientSetNull);
 
-            modelBuilder.Entity<EmployeeChangeEvent>().HasOne(s => s.Employee)
-            .WithMany()
-            .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Employee>()
+                
+                .HasOne(s => s.Department)
+            .WithMany(x => x.Employees)
+            .HasForeignKey(s => s.DepartmentId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<EmployeeChangeEvent>().HasOne(s => s.Employee)
+            //.WithMany()
+            //.OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Seed();

@@ -410,3 +410,6 @@ C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Position\Index.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Position\New.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Metrics\ManagementChainReport.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Metrics\EmployeeCountReport.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\Castle.Core.dll
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Proxies.dll

@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Conservice.Models.EmployeeCountViewModel
+
+<h1>Employee Count Reports</h1>
+
+<h2>By Manager</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var mc in Model.ManagerCounts)
+        {
+        <tr>
+            <td>@mc.ManagerName</td>
+            <td>@mc.Count</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<h2>By Department</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var mc in Model.DepartmentCounts)
+        {
+            <tr>
+                <td>@mc.DepartmentName</td>
+                <td>@mc.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>
+ 

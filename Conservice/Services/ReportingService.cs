@@ -13,11 +13,12 @@ namespace Conservice.Services
     public class ReportingService : IReportingService
     {
         readonly ConserviceContext _context;
-        private readonly IEmployeeService _employeeService;
-        public ReportingService(ConserviceContext context, IEmployeeService employeeService)
+    //    private readonly IEmployeeService _employeeService;
+        public ReportingService(ConserviceContext context)
         {
             _context = context;
-            _employeeService = employeeService;
+         
+            
         }
         public List<TerminatedReportViewModel> TerminatedReport()
         {
@@ -95,11 +96,9 @@ namespace Conservice.Services
 
                     Employee current = emp;
 
-
-                    //Otherwise add topmost manager first
                     while (current.ManagerId.HasValue)
                     {
-                        current = this._employeeService.GetEmployee(current.ManagerId.Value);
+                        current = this._context.Employees.FirstOrDefault(x => x.EmployeeId == current.ManagerId.Value);
                         EmployeeNode managerNode = new EmployeeNode(current);
                         nodeStack.Push(managerNode);
                     }
@@ -129,6 +128,56 @@ namespace Conservice.Services
             }
             return list;
         }
+
+        public EmployeeCountViewModel EmployeeCountReport()
+        {
+            var model = new EmployeeCountViewModel
+            {
+                DepartmentCounts = EmployeeCountByDepartment(),
+                ManagerCounts = EmployeeCountByManager()
+            };
+            return model;
+        }
+
+        public List<DepartmentCountViewModel> EmployeeCountByDepartment()
+        {
+           
+            //var asdfds = _employeeService.GetEmployees();
+            //List<EmployeeViewModel> employees = _context.Employees
+            //.Include(x => x.Position)
+            //.Include(x => x.Department)
+            //.Include(x => x.Manager)
+            //.ToList()
+            //.Select(x => new EmployeeViewModel(x)).ToList();
+            
+            var test = _context.Employees
+                .Include(x => x.Department)
+                .Include(x => x.Department).ToList();
+
+
+            var test2 = _context.Employees.ToList();
+
+            var dep = test2[0].Department;
+
+
+            //     ;// .GroupBy(x => x.Department).ToList();
+            List<DepartmentCountViewModel>  departmentList = _context.Employees.Include(x => x.Department).ToList()
+                .GroupBy(x => x.Department)
+                .Select(x => new DepartmentCountViewModel(x.Key.Name, x.Count())).ToList();
+            return departmentList;
+        }
+
+        public List<ManagerCountViewModel> EmployeeCountByManager()
+        {
+            List<ManagerCountViewModel> managerList = _context.Employees.Include(x => x.Department).ToList()
+                .GroupBy(x => x.Manager)
+                .Select(x => new ManagerCountViewModel(x.Key != null ? x.Key.Name : "None", x.Count())).ToList();
+            return managerList;
+        }
+
+
+
+
 
 
 

@@ -4,14 +4,16 @@ using Conservice.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Conservice.Migrations
 {
     [DbContext(typeof(ConserviceContext))]
-    partial class ConserviceContextModelSnapshot : ModelSnapshot
+    [Migration("20210313174452_EmployeeChangeEvent")]
+    partial class EmployeeChangeEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

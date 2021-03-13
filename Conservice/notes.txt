@@ -79,9 +79,9 @@ For ALL options, the application should include the following:
    ●  Page to view/edit permission assignments. ACCOUNTED - DONE
 
 Nice Features, to include after you complete the MVP:
-    ●   Photo upload for team member photos - ACCOUNTED - somewhat routine
+    ●   Photo upload for team member photos - ACCOUNTED - DONE
     ●   Ability to create new departments/positions - ACCOUNTED -  DONE
-    ●   A report view detailing the number of employees in each department/manager - ACCOUNTED - interesting
+    ●   A report view detailing the number of employees in each department/manager - ACCOUNTED - DONE
     ●   A tree hierarchy view of the management chain throughout all employees. - ACCOUNTED - DONE
           --> List<Employees>
 
@@ -93,9 +93,13 @@ Nice Features, to include after you complete the MVP:
 
     Date dropdown should initalize today
 
+    File upload validation
+
 
     TODO Dropdowns not selecting properly - DONE
 
     Dropdown for selecting appropriate filters
 
     Validate loops in employees
+
+    Debug the eager loading bug

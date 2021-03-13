@@ -19,6 +19,7 @@ namespace Conservice.Data
     }
     public class Employee
     {
+      
         public int EmployeeId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
@@ -26,25 +27,33 @@ namespace Conservice.Data
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
 
-        [ForeignKey("Position")]
+       
         public int PositionId { get; set; }
-        public Position Position { get; set; }
+        [ForeignKey("PositionId")]
+        public virtual Position Position { get; set; }
 
-        [ForeignKey("Department")]
+      
         public int DepartmentId { get; set; }
-        public Department Department { get; set; }
+        [ForeignKey("DepartmentId")]
+        public virtual Department Department { get; set; }
         public DateTime Start { get; set; }
         public DateTime? End { get; set; }
         public EmploymentStatusEnum EmploymentStatus { get; set; }
         public TimeSpan ShiftStart { get; set; }
 
         public TimeSpan ShiftEnd { get; set; }
-        [ForeignKey("Manager")]
+     
         public int? ManagerId { get; set; }
 
-        public Employee Manager { get; set; }
+        [ForeignKey("ManagerId")]
+        public virtual Employee Manager { get; set; }
         public string Photo { get; set; }
         public string Color { get; set; }
+
+        [InverseProperty("Employee")]
+        public virtual ICollection<EmployeeChangeEvent> ChangeEvents { get; set; }
+
+       // public virtual ICollection<Employee> Subordinates { get; set; }
 
     }
 }

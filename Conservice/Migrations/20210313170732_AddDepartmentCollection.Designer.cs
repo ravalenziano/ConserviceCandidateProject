@@ -4,14 +4,16 @@ using Conservice.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Conservice.Migrations
 {
     [DbContext(typeof(ConserviceContext))]
-    partial class ConserviceContextModelSnapshot : ModelSnapshot
+    [Migration("20210313170732_AddDepartmentCollection")]
+    partial class AddDepartmentCollection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,8 +218,6 @@ namespace Conservice.Migrations
 
                     b.HasKey("EmployeeChangeEventId");
 
-                    b.HasIndex("EmployeeId");
-
                     b.ToTable("EmployeeChangeEvents");
                 });
 
@@ -335,17 +335,6 @@ namespace Conservice.Migrations
                     b.Navigation("Position");
                 });
 
-            modelBuilder.Entity("Conservice.Data.EmployeeChangeEvent", b =>
-                {
-                    b.HasOne("Conservice.Data.Employee", "Employee")
-                        .WithMany("ChangeEvents")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("Conservice.Data.EmployeePermission", b =>
                 {
                     b.HasOne("Conservice.Data.Employee", "Employee")
@@ -371,11 +360,6 @@ namespace Conservice.Migrations
             modelBuilder.Entity("Conservice.Data.Department", b =>
                 {
                     b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("Conservice.Data.Employee", b =>
-                {
-                    b.Navigation("ChangeEvents");
                 });
 #pragma warning restore 612, 618
         }
