@@ -109,4 +109,4 @@ Nice Features, to include after you complete the MVP:
 
     Add READ me for email configuration
 
-    Email configuration to appsettings.json
+    Email configuration to appsettings.json - DONE
