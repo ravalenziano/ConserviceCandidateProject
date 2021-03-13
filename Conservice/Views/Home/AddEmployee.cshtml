@@ -13,8 +13,9 @@
     <input type="hidden" id="id" name="id" value="@Model.EmployeeId">
     <input type="submit" value="Remove" />
 </form>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <input type="hidden" id="EmployeeId" name="EmployeeId" value="@Model.EmployeeId">
+    <input type="hidden" id="Photo" name="Photo" value="@Model.Photo">
     <div>
         <label asp-for="Name" class="control-label"> Name:</label>
         <input asp-for="Name" />
@@ -58,7 +59,6 @@
         <span asp-validation-for="End" class="text-danger"></span>
     </div>
 
-    @*TODO Employment Status Dropdown*@
     <div>
         <label asp-for="EmploymentStatus" class="control-label"> Employment Status:</label>
         <select asp-for="EmploymentStatus" asp-items="Model.EmploymentStatusOptions"></select>
@@ -80,10 +80,18 @@
         <select asp-for="ManagerId" asp-items="Model.ManagerOptions"></select>
     </div>
 
+    @*<div>
+            <label asp-for="Photo" class="control-label"> Photo:</label>
+            <input asp-for="Photo" />
+            <span asp-validation-for="Photo" class="text-danger"></span>
+        </div>*@
+
     <div>
-        <label asp-for="Photo" class="control-label"> Photo:</label>
-        <input asp-for="Photo" />
-        <span asp-validation-for="Photo" class="text-danger"></span>
+        <label asp-for="PhotoFile">Photo</label>
+
+        <input name="PhotoFile" asp-for="PhotoFile" type="file">
+        <span asp-validation-for="PhotoFile"></span>
+
     </div>
     <div>
         <label asp-for="Color" class="control-label"> Color:</label>

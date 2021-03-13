@@ -1,5 +1,6 @@
 ﻿using Conservice.Data;
 using Conservice.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,9 @@ namespace Conservice.Services
 
         void AddPosition(Position position);
 
-      
+        Task UploadEmployeeFile(int employeeId, string rootPath, IFormFile file);
+
+
+
     }
 }

@@ -43,7 +43,7 @@
             <td>@employee.EmploymentStatusString</td>
             <td>@employee.ShiftStart - @employee.ShiftEnd</td>
             <td>@(employee.ManagerName != null ? employee.ManagerName : "" )</td>
-            <td>@employee.Photo</td>
+            <td><img height="150"  src="images/@employee.Photo"/></td>
             <td>@employee.Color</td>
         </tr>
         }

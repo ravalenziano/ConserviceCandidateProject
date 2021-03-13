@@ -1,4 +1,5 @@
 ﻿using Conservice.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,11 @@ namespace Conservice.Models
 
         public string ManagerName { get; set; }
         public string Photo { get; set; }
+
+
+
+        public IFormFile PhotoFile { get; set; }
+
         public string Color { get; set; }
 
 

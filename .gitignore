@@ -12,3 +12,5 @@ artifacts/
 .vs/
 
 Conservice/obj/
+
+wwwroot/images/

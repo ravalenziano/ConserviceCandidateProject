@@ -8,6 +8,9 @@ using Microsoft.Extensions.Logging;
 using Conservice.Data;
 using Conservice.Services;
 using Conservice.Models;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace Conservice.Controllers
 {
@@ -16,10 +19,12 @@ namespace Conservice.Controllers
       
 
         private readonly IEmployeeService _employeeService;
+        private readonly IWebHostEnvironment _hostEnv;
 
-        public HomeController(IEmployeeService employeeService)
+        public HomeController(IEmployeeService employeeService, IWebHostEnvironment  hostEnv)
         {
             _employeeService = employeeService;
+            _hostEnv = hostEnv;
         }
 
         public IActionResult Index()
@@ -61,7 +66,7 @@ namespace Conservice.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(EmployeeViewModel model)
+        public async Task<IActionResult> Edit(EmployeeViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -76,11 +81,22 @@ namespace Conservice.Controllers
             // Employee  employee = _employeeService.GetEmployee(model.EmployeeId.Value);
             Employee employee = model.ToEmployee();
             _employeeService.SaveEmployee(employee);
+
+            //Upload file
+            //TODO REFACTOR --> duplicate code
+            if (model.PhotoFile != null && model.PhotoFile.Length > 0)
+            {
+                //string filePath = getRandomFilePath(model.PhotoFile);
+                await _employeeService.UploadEmployeeFile(employee.EmployeeId,
+                    _hostEnv.WebRootPath, model.PhotoFile);
+            }
+
+
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult AddEmployee(EmployeeViewModel model)
+        public async Task<IActionResult> AddEmployee(EmployeeViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -96,8 +112,36 @@ namespace Conservice.Controllers
             
 
             _employeeService.SaveEmployee(employee);
+
+            //Upload file
+            if(model.PhotoFile != null && model.PhotoFile.Length > 0)
+            {
+              //  string filePath = getRandomFilePath(model.PhotoFile);
+                await _employeeService.UploadEmployeeFile(employee.EmployeeId,
+                    _hostEnv.WebRootPath, model.PhotoFile);
+            }
+
             return RedirectToAction("Index");
         }
+
+        
+
+        private string getRandomFileName(IFormFile file)
+        {
+            var ext = Path.GetExtension(file.FileName);
+            //  String rootPath = _hostEnv.WebRootPath;
+            return string.Format(@"{0}{1}", Guid.NewGuid(), ext);
+        }
+
+        private string getRandomFilePath(IFormFile file)
+        {
+            var fileName = getRandomFileName(file);
+            var filePath = Path.Combine(_hostEnv.WebRootPath, "images", fileName);
+            return filePath;
+        }
+
+
+
 
         public IActionResult Permissions(int id)
         {

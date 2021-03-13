@@ -1,8 +1,10 @@
 ﻿using Conservice.Data;
 using Conservice.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -89,6 +91,55 @@ namespace Conservice.Services
                   .FirstOrDefault(x => x.EmployeeId == id);
             return employee;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <param name="rootPath">IWebHostEnviornment.WebRootPath</param>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public async Task UploadEmployeeFile(int employeeId, string rootPath, IFormFile file)
+        {
+            string fileName = getRandomFileName(file);
+            string filePath = getRandomFilePath( file, rootPath, fileName);
+            if (file.Length > 0)
+            {
+                using (var fileSteam = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileSteam);
+                }
+
+                Employee employee = GetEmployee(employeeId);
+                if(employee.Photo != null)
+                {
+                    //Delete old photo
+                    File.Delete(Path.Combine(rootPath, "images", employee.Photo));
+                }
+
+                employee.Photo = fileName;
+               await _context.SaveChangesAsync();
+            }
+        }
+
+        private string getRandomFilePath(IFormFile file,string rootPath, string fileName)
+        {
+           // var fileName = getRandomFileName(file);
+            var filePath = Path.Combine(rootPath, "images", fileName);
+            return filePath;
+        }
+
+        private string getRandomFileName(IFormFile file)
+        {
+            var ext = Path.GetExtension(file.FileName);
+            //  String rootPath = _hostEnv.WebRootPath;
+            return string.Format(@"{0}{1}", Guid.NewGuid(), ext);
+        }
+
+        //private string getRandomFileName(string fileExtension)
+        //{
+        //    return string.Format(@"{0}{1}", Guid.NewGuid(), fileExtension); 
+        //}
 
         public void SaveEmployee(Employee employee)
         {

@@ -82,7 +82,7 @@ Nice Features, to include after you complete the MVP:
     ●   Photo upload for team member photos - ACCOUNTED - somewhat routine
     ●   Ability to create new departments/positions - ACCOUNTED -  DONE
     ●   A report view detailing the number of employees in each department/manager - ACCOUNTED - interesting
-    ●   A tree hierarchy view of the management chain throughout all employees. - ACCOUNTED - interesting
+    ●   A tree hierarchy view of the management chain throughout all employees. - ACCOUNTED - DONE
           --> List<Employees>
 
 
