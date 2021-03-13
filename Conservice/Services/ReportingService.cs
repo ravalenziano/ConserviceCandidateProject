@@ -78,7 +78,10 @@ namespace Conservice.Services
             foreach (var emp in employees)
             {
                 EmployeeNode node = new EmployeeNode(emp);
-
+                if (employeeMap.ContainsKey(emp.EmployeeId))
+                {
+                    continue;
+                }
                 //If manager has already been added to a tree, add employee as a child
                 if (emp.ManagerId.HasValue && employeeMap.ContainsKey(emp.ManagerId.Value))
                 {
@@ -107,7 +110,10 @@ namespace Conservice.Services
                         root = nodeStack.Pop()
                     };
                     var currentNode = tree.root;
+
+                    employeeMap[emp.EmployeeId] = node;
                     employeeMap[currentNode.EmployeeId] = currentNode;
+
                     while (nodeStack.Count > 0)
                     {
                         var stackNode = nodeStack.Pop();

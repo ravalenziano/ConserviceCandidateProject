@@ -97,3 +97,5 @@ Nice Features, to include after you complete the MVP:
     TODO Dropdowns not selecting properly - DONE
 
     Dropdown for selecting appropriate filters
+
+    Validate loops in employees
