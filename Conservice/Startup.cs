@@ -37,7 +37,7 @@ namespace Conservice
             
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IReportingService, ReportingService>();
-
+            services.AddScoped<IEmailService, EmailService>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 

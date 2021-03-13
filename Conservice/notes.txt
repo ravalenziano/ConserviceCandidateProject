@@ -103,3 +103,10 @@ Nice Features, to include after you complete the MVP:
     Validate loops in employees
 
     Debug the eager loading bug
+
+
+    https://blog.elmah.io/how-to-send-emails-from-csharp-net-the-definitive-tutorial/
+
+    Add READ me for email configuration
+
+    Email configuration to appsettings.json

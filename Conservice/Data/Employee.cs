@@ -53,6 +53,9 @@ namespace Conservice.Data
         [InverseProperty("Employee")]
         public virtual ICollection<EmployeeChangeEvent> ChangeEvents { get; set; }
 
+        [InverseProperty("Employee")]
+        public virtual ICollection<NotificationSubscription> Subscriptions { get; set; }
+
        // public virtual ICollection<Employee> Subordinates { get; set; }
 
     }

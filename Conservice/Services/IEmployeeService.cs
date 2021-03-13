@@ -38,7 +38,13 @@ namespace Conservice.Services
 
         Task UploadEmployeeFile(int employeeId, string rootPath, IFormFile file);
 
+        void DeleteSubscription(int id);
 
+        void AddSubscription(NotificationSubscription subscription);
+
+        List<SubscriptionViewModel> GetSubscriptions();
+
+        List<EmployeeViewModel> GetSubscriptionOptions();
 
     }
 }

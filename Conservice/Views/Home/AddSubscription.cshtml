@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model SubscriptionViewModel
+
+<h1>Add Subscription</h1>
+
+<form method="post">
+    @*<div>
+        <label asp-for="Name" class="control-label"> Name:</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>*@
+
+    <div>
+        <label asp-for="EmployeeId" class="control-label"> Employment Status:</label>
+        <select asp-for="EmployeeId" asp-items="Model.SubscriberOptions"></select>
+    </div>
+    <input type="submit" />
+</form>

@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model List<SubscriptionViewModel>
+
+<h1>Subscriptions</h1>
+
+<a class="btn btn-primary" href="@Url.Action("AddSubscription", "Home")">Add New</a>
+
+<table id="departmentTable" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var sub in Model)
+        {
+        <tr>
+            <td>@sub.Name</td>
+            <td>@sub.Email</td>
+            <td>
+                <form method="post" action="/Home/RemoveSubscription">
+                    <input type="hidden" id="id" name="id" value="@sub.NotificationSubscriptionId">
+                    <input class="btn btn-primary" type="submit" value="Remove" />
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

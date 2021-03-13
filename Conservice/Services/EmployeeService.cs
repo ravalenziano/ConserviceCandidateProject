@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Conservice.Services
@@ -13,9 +14,11 @@ namespace Conservice.Services
     public class EmployeeService : IEmployeeService
     {
        private  readonly ConserviceContext _context;
-        public EmployeeService(ConserviceContext context)
+        private readonly IEmailService _emailService;
+        public EmployeeService(ConserviceContext context, IEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         public List<EmployeeChangeEventViewModel> GetChangeEvents()
@@ -205,16 +208,18 @@ namespace Conservice.Services
 
                 Employee newManager = newData.ManagerId == null ? null : GetEmployee(newData.ManagerId.Value);
 
-
-
-                changeList.Add(new EmployeeChangeEvent
+                //TODO refactor
+                var changeEvt = new EmployeeChangeEvent
                 {
                     EmployeeId = existing.EmployeeId,
                     Old = oldManager.Name,
                     New = newManager == null ? "" : newManager.Name,
                     Time = time,
                     ChangeEventType = changeType,
-                });
+                };
+                changeList.Add(changeEvt);
+
+                SendAlerts(changeEvt);
             }
             if(existing.PositionId != newData.PositionId)
             {
@@ -230,8 +235,7 @@ namespace Conservice.Services
                 {
                     oldPos = GetPosition(existing.PositionId); 
                 }
-
-                changeList.Add(new EmployeeChangeEvent
+                var changeEvt = new EmployeeChangeEvent
                 {
                     EmployeeId = existing.EmployeeId,
                     Old = oldPos.Name,
@@ -239,13 +243,17 @@ namespace Conservice.Services
                     Time = time,
                     ChangeEventType = changeType,
 
-                });
+                };
+                changeList.Add(changeEvt);
+
+                SendAlerts(changeEvt);
             }
 
             if (existing.EmploymentStatus != newData.EmploymentStatus)
             {
                 EmployeeChangeEventTypeEnum changeType = EmployeeChangeEventTypeEnum.StatusChange;
-                changeList.Add(new EmployeeChangeEvent
+
+                var changeEvt = new EmployeeChangeEvent
                 {
                     EmployeeId = existing.EmployeeId,
                     Old = existing.EmploymentStatus.ToString(),
@@ -253,7 +261,8 @@ namespace Conservice.Services
                     Time = time,
                     ChangeEventType = changeType,
 
-                });
+                };
+                changeList.Add(changeEvt);
             }
             return changeList;
         }
@@ -288,7 +297,9 @@ namespace Conservice.Services
             string prevString = string.Join(",", previous.Select(x => x.Permission.ToString()));
             string currentString = string.Join(",", current.Select(x => x.Permission.ToString()));
             EmployeeChangeEventTypeEnum changeType = EmployeeChangeEventTypeEnum.PermissionChange;
-           var evt = new EmployeeChangeEvent
+         
+            
+            var evt = new EmployeeChangeEvent
             {
                 EmployeeId = employeeId,
                 Old = prevString,
@@ -298,6 +309,8 @@ namespace Conservice.Services
 
             };
             _context.Add(evt);
+            SendAlerts(evt);
+
             _context.SaveChanges();
         }
 
@@ -316,5 +329,69 @@ namespace Conservice.Services
             }
             
         }
+
+        public void SendAlerts(EmployeeChangeEvent changeEvent)
+        {
+            var subscriptions = _context.NotrificationSubscriptions
+                .Include(x => x.Employee)
+                .ToList();
+            foreach(var sub in subscriptions)
+            {
+                string subject = "Change Event Notificaiton";
+                string body = alertEmailBody(changeEvent, sub.Employee.Name);
+                string recipient = sub.Employee.Email;
+                _emailService.SendMail(subject, body, recipient);
+            }
+        }
+
+        private string alertEmailBody(EmployeeChangeEvent changeEvent, string employeeName)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("Employee Change: ");
+            builder.AppendLine("Employee " + employeeName);
+            builder.AppendLine("Old: " + changeEvent.Old);
+            builder.AppendLine("New: " + changeEvent.New);
+            builder.AppendLine("Date: " + changeEvent.Time.ToString());
+            return builder.ToString();
+        }
+
+        public void AddSubscription(NotificationSubscription subscription)
+        {
+            _context.Add(subscription);
+            _context.SaveChanges();
+        }
+
+        public void DeleteSubscription(int id)
+        {
+            var sub =_context.NotrificationSubscriptions.FirstOrDefault(x => x.NotificationSubscriptionId == id);
+            if(sub != null)
+            {
+                _context.Remove(sub);
+                _context.SaveChanges();
+            }
+            
+        }
+
+        public List<EmployeeViewModel> GetSubscriptionOptions()
+        {
+            List<EmployeeViewModel> employeeOptions = _context.Employees
+             .Where(x => x.Subscriptions.Count == 0)
+             .Select(x => new EmployeeViewModel(x)).ToList();
+            return employeeOptions;
+        }
+
+        public List<SubscriptionViewModel> GetSubscriptions()
+        {
+
+            List<EmployeeViewModel> employeeOptions = GetSubscriptionOptions();
+           var list = _context.NotrificationSubscriptions
+                .Include(x => x.Employee).ToList()
+                .Select(x => new SubscriptionViewModel(x, employeeOptions)).ToList();
+            return list;
+        }
+
+     
+
+
     }
 }
