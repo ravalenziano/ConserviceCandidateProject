@@ -29,6 +29,12 @@ namespace Conservice.Controllers
             return View(model);
         }
 
+
+        public IActionResult ManagementChainReport()
+        {
+            var model = _reportingService.ManagementChainReport();
+            return View(model);
+        }
         
     }
 }

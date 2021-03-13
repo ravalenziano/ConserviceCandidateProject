@@ -9,6 +9,10 @@
 @await Html.PartialAsync("./Shared/EmployeeTabs.cshtml")
 
 <h1>Profile</h1>
+<form method="post" action="/Home/DeleteEmployee">
+    <input type="hidden" id="id" name="id" value="@Model.EmployeeId">
+    <input type="submit" value="Remove" />
+</form>
 <form method="post">
     <input type="hidden" id="EmployeeId" name="EmployeeId" value="@Model.EmployeeId">
     <div>

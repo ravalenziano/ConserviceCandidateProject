@@ -45,5 +45,6 @@ namespace Conservice.Data
         public Employee Manager { get; set; }
         public string Photo { get; set; }
         public string Color { get; set; }
+
     }
 }

@@ -30,7 +30,7 @@ namespace Conservice.Data
 
             modelBuilder.Entity<Employee>().HasOne(s => s.Manager)
             .WithMany()
-            .OnDelete(DeleteBehavior.NoAction);
+            .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<EmployeeChangeEvent>().HasOne(s => s.Employee)
             .WithMany()

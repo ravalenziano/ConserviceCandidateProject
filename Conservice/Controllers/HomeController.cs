@@ -37,6 +37,14 @@ namespace Conservice.Controllers
             return View(model);
         }
 
+        public IActionResult DeleteEmployee(int id)
+        {
+            _employeeService.DeleteEmployee(id);
+            return RedirectToAction("Index");
+        }
+
+        
+
         public IActionResult Edit(int id)
         {
             var employee = _employeeService.GetEmployee(id);
@@ -61,7 +69,7 @@ namespace Conservice.Controllers
                 var departmentOptions = _employeeService.GetDepartments();
                 var managerOptions = _employeeService.GetEmployees();
                 model.InitOptions(positionOptions, departmentOptions, managerOptions);
-                return View(model);
+                return View("AddEmployee", model);
             }
 
 

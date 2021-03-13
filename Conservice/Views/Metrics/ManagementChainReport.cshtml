@@ -1,0 +1,15 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Conservice.Models.ManagementChainViewModel
+
+<h1>Management Chain Report</h1>
+@foreach (var tree in Model.TreeList)
+{
+    @Html.Raw(tree.ToHtmlElement());
+    
+}
+

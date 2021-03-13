@@ -10,5 +10,7 @@ namespace Conservice.Services
     {
         List<TerminatedReportViewModel> TerminatedReport();
         List<HireReportViewModel> HireReport();
+
+        ManagementChainViewModel ManagementChainReport();
     }
 }

@@ -139,8 +139,16 @@ namespace Conservice.Models
             DepartmentOptions = departmentOptions.Select(x => new SelectListItem(x.Name, x.DepartmentId.ToString(),
                 x.DepartmentId == DepartmentId)
                 ).ToList();
-            ManagerOptions = managerOptions.Select(x => new SelectListItem(x.Name, x.EmployeeId.ToString(), 
-                x.ManagerId == ManagerId)).ToList();
+            ManagerOptions = new List<SelectListItem>();
+
+            ManagerOptions.Add(new SelectListItem("None", "", ManagerId == null));
+
+            managerOptions.Select(x => new SelectListItem(x.Name, x.EmployeeId.ToString(),
+                x.ManagerId == ManagerId)).ToList().ForEach(elem =>
+                {
+                    ManagerOptions.Add(elem);
+                });
+            
             EmploymentStatusOptions = new List<SelectListItem>();
             var esOptions = (EmploymentStatusEnum[])Enum.GetValues(typeof(EmploymentStatusEnum));
             for (int i = 0; i < esOptions.Length; i++)
@@ -155,8 +163,18 @@ namespace Conservice.Models
     public class PositionViewModel
     {
         public int PositionId { get; set; }
+        [Required]
         public string Name { get; set; }
 
+
+        public Position ToPosition()
+        {
+            return new Position
+            {
+                PositionId = PositionId,
+                Name = Name,
+            };
+        }
        public  PositionViewModel(Position position)
         {
             Name = position.Name;
@@ -174,7 +192,17 @@ namespace Conservice.Models
     public class DepartmentViewModel
     {
         public int DepartmentId { get; set; }
+        [Required]
         public string Name { get; set; }
+
+        public Department ToDepartment()
+        {
+            return new Department
+            {
+                DepartmentId = DepartmentId,
+                Name = Name
+            };
+        }
 
         public DepartmentViewModel(Department department)
         {

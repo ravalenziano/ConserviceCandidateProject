@@ -43,6 +43,12 @@ namespace Conservice.Services
             return position;
         }
 
+        public void AddPosition(Position position)
+        {
+            _context.Add(position);
+            _context.SaveChanges();
+        }
+
         public List<DepartmentViewModel> GetDepartments()
         {
             List<DepartmentViewModel> departments = _context.Departments.ToList()
@@ -57,7 +63,11 @@ namespace Conservice.Services
             return department;
         }
 
-
+       public void AddDepartment(Department department)
+        {
+            _context.Add(department);
+            _context.SaveChanges();
+        }
 
         public List<EmployeeViewModel> GetEmployees()
         {
@@ -101,6 +111,17 @@ namespace Conservice.Services
             _context.SaveChanges(); 
         }
 
+        //Probably shoud be soft delete
+        public void DeleteEmployee(int id)
+        {
+            Employee employee = GetEmployee(id);
+            if(employee != null)
+            {
+                _context.Remove(employee);
+                _context.SaveChanges();
+            }
+        }
+
         private void updateEmployee(Employee existing, Employee newData)
         {
             existing.Name = newData.Name;
@@ -139,7 +160,7 @@ namespace Conservice.Services
                 {
                     EmployeeId = existing.EmployeeId,
                     Old = oldManager.Name,
-                    New = newManager.Name,
+                    New = newManager == null ? "" : newManager.Name,
                     Time = time,
                     ChangeEventType = changeType,
                 });

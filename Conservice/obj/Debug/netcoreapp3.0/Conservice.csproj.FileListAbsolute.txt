@@ -405,3 +405,8 @@ C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\ActivityLog\Index.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Home\Permissions.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Home\Shared\EmployeeTabs.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Department\Index.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Department\New.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Position\Index.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Position\New.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Metrics\ManagementChainReport.cshtml.g.cs

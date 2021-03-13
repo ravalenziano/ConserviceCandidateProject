@@ -27,5 +27,14 @@ namespace Conservice.Services
         void RemovePermission(int employeePermissionId);
 
         List<EmployeePermissionViewModel> GetPermissions(int employeeId);
+
+
+        void DeleteEmployee(int id);
+
+        void AddDepartment(Department department);
+
+        void AddPosition(Position position);
+
+      
     }
 }

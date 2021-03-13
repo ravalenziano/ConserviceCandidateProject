@@ -21,15 +21,15 @@ namespace Conservice.Services
         }
         public List<TerminatedReportViewModel> TerminatedReport()
         {
-             List<TerminatedReportViewModel> list =  _context.EmployeeChangeEvents
-                .Where(x => x.ChangeEventType == EmployeeChangeEventTypeEnum.StatusChange
-                && x.New == EmploymentStatusEnum.Terminated.ToString())
-                .GroupBy(x => x.Time.Year)
-                .Select(x => new TerminatedReportViewModel(
-                    x.Key,
-                    x.Count()
+            List<TerminatedReportViewModel> list = _context.EmployeeChangeEvents
+               .Where(x => x.ChangeEventType == EmployeeChangeEventTypeEnum.StatusChange
+               && x.New == EmploymentStatusEnum.Terminated.ToString())
+               .GroupBy(x => x.Time.Year)
+               .Select(x => new TerminatedReportViewModel(
+                   x.Key,
+                   x.Count()
 
-                    )).ToList();
+                   )).ToList();
 
             return list;
 
@@ -47,18 +47,84 @@ namespace Conservice.Services
                 .OrderByDescending(x => x.Year)
                 .ThenByDescending(x => x.Week)
                 .ToList();
-            return list; 
+            return list;
         }
 
         /*
          *Reference: https://stackoverflow.com/questions/8561782/how-to-group-dates-by-week
          */
         Func<DateTime, String> yearWeekProjector =
-    d => {
-        return  d.Year.ToString() + "_" +
+    d =>
+    {
+        return d.Year.ToString() + "_" +
      CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d,
        CalendarWeekRule.FirstFourDayWeek,
        DayOfWeek.Sunday).ToString();
     };
+
+        public ManagementChainViewModel ManagementChainReport()
+        {
+            var tree = GetEmployeeNodeTree();
+            return new ManagementChainViewModel(tree);
+        }
+
+        public List<EmployeeNodeTree> GetEmployeeNodeTree()
+        {
+            List<Employee> employees = _context.Employees.ToList();
+
+            List<EmployeeNodeTree> list = new List<EmployeeNodeTree>();
+            Dictionary<int, EmployeeNode> employeeMap = new Dictionary<int, EmployeeNode>();
+
+            foreach (var emp in employees)
+            {
+                EmployeeNode node = new EmployeeNode(emp);
+
+                //If manager has already been added to a tree, add employee as a child
+                if (emp.ManagerId.HasValue && employeeMap.ContainsKey(emp.ManagerId.Value))
+                {
+                    employeeMap[emp.ManagerId.Value].Children.Add(node);
+                    employeeMap[emp.EmployeeId] = node;
+                }
+                else
+                {
+                    Stack<EmployeeNode> nodeStack = new Stack<EmployeeNode>();
+                    nodeStack.Push(node);
+
+                    Employee current = emp;
+
+
+                    //Otherwise add topmost manager first
+                    while (current.ManagerId.HasValue)
+                    {
+                        current = this._employeeService.GetEmployee(current.ManagerId.Value);
+                        EmployeeNode managerNode = new EmployeeNode(current);
+                        nodeStack.Push(managerNode);
+                    }
+
+
+                    EmployeeNodeTree tree = new EmployeeNodeTree
+                    {
+                        root = nodeStack.Pop()
+                    };
+                    var currentNode = tree.root;
+                    employeeMap[currentNode.EmployeeId] = currentNode;
+                    while (nodeStack.Count > 0)
+                    {
+                        var stackNode = nodeStack.Pop();
+                        currentNode.Children.Add(stackNode);
+                        employeeMap[currentNode.EmployeeId] = currentNode;
+
+                        currentNode = stackNode;
+                    }
+                    list.Add(tree);
+                }
+
+               
+            }
+            return list;
+        }
+
+
+
     }
 }
