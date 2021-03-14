@@ -429,9 +429,21 @@ namespace Conservice.Services
            
             return _context.Employees.Any(x => x.Email == email && employeeId != x.EmployeeId);
         }
+        
+        public List<EmployeePermissionsViewModel> GetPermissionList()
+        {
+            var permissions = _context.Employees.Include(x => x.Permissions)
+                .Select(x => new EmployeePermissionsViewModel
+                {
+                    EmployeeId = x.EmployeeId,
+                    EmployeeName = x.Name,
+                    Permissions = x.Permissions.Select(x => x.Permission).ToList()
+                })
+                .OrderBy(x => x.EmployeeName)
+                .ToList();
 
-     
-
+            return permissions;
+        }
 
     }
 }

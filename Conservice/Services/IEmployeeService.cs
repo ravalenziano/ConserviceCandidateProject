@@ -54,5 +54,7 @@ namespace Conservice.Services
 
         bool EmployeeIsManager(int id);
 
+        List<EmployeePermissionsViewModel> GetPermissionList();
+
     }
 }

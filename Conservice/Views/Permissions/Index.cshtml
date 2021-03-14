@@ -1,0 +1,59 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<EmployeePermissionsViewModel>
+
+<h1>Permissions</h1>
+
+
+<table id="permissionsTable" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Permissions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in Model)
+        {
+            <tr data-id="@entry.EmployeeId">
+                <td>@entry.EmployeeName</td>
+                <td>
+
+                    @entry.PermissionsString
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Styles{
+    <style>
+
+        #permissionsTable tr {
+            cursor: pointer;
+        }
+    </style>
+}
+
+@section Scripts{
+
+    <script>
+
+        var table = $('#permissionsTable').DataTable({
+            orderCellsTop: true,
+            fixedHeader: true,
+            "ordering": false,
+            pageLength: 50
+        });
+
+        table.on('click', 'tbody tr', function (event) {
+            var id = table.row(this).node().dataset.id;
+            window.location = '/Employee/Permissions/' + id;
+        })
+    </script>
+} 

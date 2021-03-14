@@ -114,7 +114,6 @@
             table.row(1).id(123);
 
             table.on('click', 'tbody tr', function (event) {
-                console.log(event);
                 var id = table.row(this).node().dataset.id;
                 window.location = '/Employee/Edit/' + id;
             })

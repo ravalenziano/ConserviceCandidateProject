@@ -74,4 +74,24 @@ namespace Conservice.Models
 
         public int EmployeeId { get; set; }
     }
+
+    //public class PermissionsListViewModel
+    //{
+    //    List<EmployeePermissionsViewModel>
+    //}
+
+    public class EmployeePermissionsViewModel
+    {
+        public int EmployeeId { get; set; }
+
+        public string EmployeeName { get; set; }
+
+        public List<PermissionEnum> Permissions { get; set; }
+
+        public string PermissionsString { get
+            {
+                return string.Join(",", Permissions);
+            } }
+
+    }
 }

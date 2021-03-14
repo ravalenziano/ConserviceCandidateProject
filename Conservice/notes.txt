@@ -38,7 +38,7 @@ HR department requires the ability to do the following items:
                 Query:
                     EmployeeChangeEventTypeEnum.StatusChange  EmploymentStatusEnum.Terminated - Date --> Group by year - Sum(Where)
                            
-    ●   In an effort to maintain the site’s security have a page to view all permission assignments for all team members. - ACCOUNTED
+    ●   In an effort to maintain the site’s security have a page to view all permission assignments for all team members. - NO PAGE??
          - Add permission - Dropdown, Add button
          - Remove permission - Remove button next to permission
 
