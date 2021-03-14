@@ -128,6 +128,11 @@ Nice Features, to include after you complete the MVP:
 
       Add READ me for email configuration
 
+      terminated should also set end date
+
+      Date field sort in datatables
+
+   Activity log   Terminated should also have a end date
      
 
     

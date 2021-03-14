@@ -16,7 +16,7 @@
     <input type="hidden" id="id" name="id" value="@Model.EmployeeId">
     <input type="submit" value="Remove" />
 </form>
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" action="/Employee/SaveEmployee">
     <input type="hidden" id="EmployeeId" name="EmployeeId" value="@Model.EmployeeId">
     <input type="hidden" id="Photo" name="Photo" value="@Model.Photo">
     <div>

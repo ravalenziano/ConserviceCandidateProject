@@ -69,9 +69,9 @@ namespace Conservice.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EmployeeViewModel model)
+        public async Task<IActionResult> SaveEmployee(EmployeeViewModel model)
         {
-            if (model.EmployeeId.HasValue &&_reportingService.WillContainCycles(model.EmployeeId.Value, model.ManagerId))
+            if (model.EmployeeId.HasValue && _reportingService.WillContainCycles(model.EmployeeId.Value, model.ManagerId))
             {
                 //ERROR
                 ModelState.AddModelError("ManagerId", "Manager cycle detected. Manager A --> Manager B --> Manager C --> Manager A");
@@ -96,15 +96,12 @@ namespace Conservice.Controllers
             }
 
             Employee employee = model.ToEmployee();
-            // Employee  employee = _employeeService.GetEmployee(model.EmployeeId.Value);
 
             _employeeService.SaveEmployee(employee);
 
             //Upload file
-            //TODO REFACTOR --> duplicate code
             if (model.PhotoFile != null && model.PhotoFile.Length > 0)
             {
-                //string filePath = getRandomFilePath(model.PhotoFile);
                 await _employeeService.UploadEmployeeFile(employee.EmployeeId,
                     _hostEnv.WebRootPath, model.PhotoFile);
 
@@ -114,47 +111,91 @@ namespace Conservice.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddEmployee(EmployeeViewModel model)
-        {
-            if (model.EmployeeId.HasValue && _reportingService.WillContainCycles(model.EmployeeId.Value, model.ManagerId))
-            {
-                //ERROR
-                ModelState.AddModelError("ManagerId", "Manager cycle detected. Manager A --> Manager B --> Manager C --> Manager A");
-            }
-            if (model.Email != null && 
-                _employeeService.EmployeeEmailExists(model.Email,
-                    model.EmployeeId.HasValue ? model.EmployeeId.Value : 0
-                ))
-            {
-                ModelState.AddModelError("Email", "Email already exists.");
-            }
-            if (!ModelState.IsValid)
-            {
-                var positionOptions = _employeeService.GetPositions();
-                var departmentOptions = _employeeService.GetDepartments();
-                var managerOptions = _employeeService.GetEmployees();
-                model.InitOptions(positionOptions, departmentOptions, managerOptions);
-                return View(model);
-            }
-            Employee employee;
-        
-                employee = model.ToEmployee();
+        //[HttpPost]
+        //public async Task<IActionResult> Edit(EmployeeViewModel model)
+        //{
+        //    if (model.EmployeeId.HasValue &&_reportingService.WillContainCycles(model.EmployeeId.Value, model.ManagerId))
+        //    {
+        //        //ERROR
+        //        ModelState.AddModelError("ManagerId", "Manager cycle detected. Manager A --> Manager B --> Manager C --> Manager A");
+        //    }
 
-            _employeeService.SaveEmployee(employee);
+        //    if (model.Email != null &&
+        //     _employeeService.EmployeeEmailExists(model.Email,
+        //         model.EmployeeId.HasValue ? model.EmployeeId.Value : 0
+        //     ))
+        //    {
+        //        ModelState.AddModelError("Email", "Email already exists.");
+        //    }
 
-            //Upload file
-            if(model.PhotoFile != null && model.PhotoFile.Length > 0)
-            {
-              //  string filePath = getRandomFilePath(model.PhotoFile);
-                await _employeeService.UploadEmployeeFile(employee.EmployeeId,
-                    _hostEnv.WebRootPath, model.PhotoFile);
-            }
 
-            return RedirectToAction("Index");
-        }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        var positionOptions = _employeeService.GetPositions();
+        //        var departmentOptions = _employeeService.GetDepartments();
+        //        var managerOptions = _employeeService.GetEmployees();
+        //        model.InitOptions(positionOptions, departmentOptions, managerOptions);
+        //        return View("AddEmployee", model);
+        //    }
 
-        
+        //    Employee employee = model.ToEmployee();
+
+        //    _employeeService.SaveEmployee(employee);
+
+        //    //Upload file
+        //    //TODO REFACTOR --> duplicate code
+        //    if (model.PhotoFile != null && model.PhotoFile.Length > 0)
+        //    {
+        //        await _employeeService.UploadEmployeeFile(employee.EmployeeId,
+        //            _hostEnv.WebRootPath, model.PhotoFile);
+
+        //    }
+
+
+        //    return RedirectToAction("Index");
+        //}
+
+        //[HttpPost]
+        //public async Task<IActionResult> AddEmployee(EmployeeViewModel model)
+        //{
+        //    if (model.EmployeeId.HasValue && _reportingService.WillContainCycles(model.EmployeeId.Value, model.ManagerId))
+        //    {
+        //        //ERROR
+        //        ModelState.AddModelError("ManagerId", "Manager cycle detected. Manager A --> Manager B --> Manager C --> Manager A");
+        //    }
+        //    if (model.Email != null && 
+        //        _employeeService.EmployeeEmailExists(model.Email,
+        //            model.EmployeeId.HasValue ? model.EmployeeId.Value : 0
+        //        ))
+        //    {
+        //        ModelState.AddModelError("Email", "Email already exists.");
+        //    }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        var positionOptions = _employeeService.GetPositions();
+        //        var departmentOptions = _employeeService.GetDepartments();
+        //        var managerOptions = _employeeService.GetEmployees();
+        //        model.InitOptions(positionOptions, departmentOptions, managerOptions);
+        //        return View(model);
+        //    }
+        //    Employee employee;
+
+        //        employee = model.ToEmployee();
+
+        //    _employeeService.SaveEmployee(employee);
+
+        //    //Upload file
+        //    if(model.PhotoFile != null && model.PhotoFile.Length > 0)
+        //    {
+        //      //  string filePath = getRandomFilePath(model.PhotoFile);
+        //        await _employeeService.UploadEmployeeFile(employee.EmployeeId,
+        //            _hostEnv.WebRootPath, model.PhotoFile);
+        //    }
+
+        //    return RedirectToAction("Index");
+        //}
+
+
 
         private string getRandomFileName(IFormFile file)
         {
