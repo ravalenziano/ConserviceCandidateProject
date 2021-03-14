@@ -11,7 +11,6 @@ C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Conservice.TagHelpers.input.cache
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Conservice.TagHelpers.output.cache
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Conservice.RazorCoreGenerate.cache
-C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\_ViewStart.cshtml.g.cs
@@ -400,11 +399,8 @@ C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Conservice.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Home\AddEmployee.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Metrics\Index.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\ActivityLog\Index.cshtml.g.cs
-C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Home\Permissions.cshtml.g.cs
-C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Home\Shared\EmployeeTabs.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Department\Index.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Department\New.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Position\Index.cshtml.g.cs
@@ -413,5 +409,10 @@ C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Metrics\EmployeeCountReport.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\Castle.Core.dll
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Proxies.dll
-C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Home\Subscriptions.cshtml.g.cs
-C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Home\AddSubscription.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Employee\AddEmployee.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Employee\Index.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Employee\Permissions.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Employee\Shared\EmployeeTabs.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\ActivityLog\AddSubscription.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\ActivityLog\Shared\ActivityLogTabs.cshtml.g.cs
+C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\ActivityLog\Subscriptions.cshtml.g.cs

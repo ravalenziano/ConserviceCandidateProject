@@ -106,16 +106,24 @@ Nice Features, to include after you complete the MVP:
 
       Add remove button to positions and departments  - SKIP
 
+         Dropdown for selecting appropriate filters - SKIP
 
+             Change name of home controller to employee controller - DONE
 
-
-    Dropdown for selecting appropriate filters
+                 Remove permissions tab for add noew - DONE
+ 
 
     Validate loops in employees
 
-    Change name of home controller to employee controller
+    Display photo in profile
+
+    Add subscriptions tab to activity log
+
+     Add styles
 
       Add READ me for email configuration
 
-      Add styles
+     
+
+    
 

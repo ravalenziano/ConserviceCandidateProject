@@ -5,11 +5,14 @@
 @model Conservice.Models.EmployeeViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+@if (Model.EmployeeId != null)
+{
+    @await Html.PartialAsync("./Shared/EmployeeTabs.cshtml")
+}
 
-@await Html.PartialAsync("./Shared/EmployeeTabs.cshtml")
 
 <h1>Profile</h1>
-<form method="post" action="/Home/DeleteEmployee">
+<form method="post" action="/Employee/DeleteEmployee">
     <input type="hidden" id="id" name="id" value="@Model.EmployeeId">
     <input type="submit" value="Remove" />
 </form>
@@ -85,6 +88,16 @@
             <input asp-for="Photo" />
             <span asp-validation-for="Photo" class="text-danger"></span>
         </div>*@
+
+    @if (Model.Photo != null)
+    {
+<div>
+    <img height="150" src="~/images/@Model.Photo" />
+</div>
+
+        
+    }
+
 
     <div>
         <label asp-for="PhotoFile">Photo</label>

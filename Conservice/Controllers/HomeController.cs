@@ -14,14 +14,14 @@ using Microsoft.AspNetCore.Http;
 
 namespace Conservice.Controllers
 {
-    public class HomeController : Controller
+    public class EmployeeController : Controller
     {
       
 
         private readonly IEmployeeService _employeeService;
         private readonly IWebHostEnvironment _hostEnv;
 
-        public HomeController(IEmployeeService employeeService, IWebHostEnvironment  hostEnv)
+        public EmployeeController(IEmployeeService employeeService, IWebHostEnvironment  hostEnv)
         {
             _employeeService = employeeService;
             _hostEnv = hostEnv;
@@ -175,39 +175,39 @@ namespace Conservice.Controllers
             return RedirectToAction("Permissions", new { id = model.EmployeeId });
         }
 
-        public IActionResult Subscriptions()
-        {
-            var model = _employeeService.GetSubscriptions();
-            return View(model);
-        }
+        //public IActionResult Subscriptions()
+        //{
+        //    var model = _employeeService.GetSubscriptions();
+        //    return View(model);
+        //}
 
-        public IActionResult AddSubscription()
-        {
-            var options = _employeeService.GetSubscriptionOptions();
-            var model = new SubscriptionViewModel(options);
-            return View(model);
-        }
+        //public IActionResult AddSubscription()
+        //{
+        //    var options = _employeeService.GetSubscriptionOptions();
+        //    var model = new SubscriptionViewModel(options);
+        //    return View(model);
+        //}
 
 
-            [HttpPost]
-        public IActionResult AddSubscription(SubscriptionViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                var options = _employeeService.GetSubscriptionOptions();
-                model.InitOptions(options);
-                return View(model);
-            }
-            _employeeService.AddSubscription(model.ToSubscription());
-            return RedirectToAction("Subscriptions");
-        }
+        //    [HttpPost]
+        //public IActionResult AddSubscription(SubscriptionViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        var options = _employeeService.GetSubscriptionOptions();
+        //        model.InitOptions(options);
+        //        return View(model);
+        //    }
+        //    _employeeService.AddSubscription(model.ToSubscription());
+        //    return RedirectToAction("Subscriptions");
+        //}
 
-        [HttpPost]
-        public IActionResult RemoveSubscription(int id)
-        {
-            _employeeService.DeleteSubscription(id);
-            return RedirectToAction("Subscriptions");
-        }
+        //[HttpPost]
+        //public IActionResult RemoveSubscription(int id)
+        //{
+        //    _employeeService.DeleteSubscription(id);
+        //    return RedirectToAction("Subscriptions");
+        //}
 
 
 
