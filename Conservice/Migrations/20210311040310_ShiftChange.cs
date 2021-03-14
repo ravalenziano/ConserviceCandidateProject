@@ -86,12 +86,14 @@ namespace Conservice.Migrations
             migrationBuilder.InsertData(
                 table: "Employees",
                 columns: new[] { "EmployeeId", "Address", "Color", "DepartmentId", "EmploymentStatus", "End", "ManagerId", "Name", "PhoneNumber", "Photo", "PositionId", "ShiftEnd", "ShiftStart", "Start" },
-                values: new object[] { 4, "104 Fake St", "Blue", 2, 0, null, 4, "Richard Valenziano", "9192362344", null, 3, new TimeSpan(0, 22, 0, 0, 0), new TimeSpan(0, 12, 0, 0, 0), new DateTime(2021, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 3, "103 Fake St", "Pink", 3, 0, null, null, "Alex Honnold", "9192342344", null, 7, new TimeSpan(0, 22, 0, 0, 0), new TimeSpan(0, 12, 0, 0, 0), new DateTime(1996, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
 
             migrationBuilder.InsertData(
                 table: "Employees",
                 columns: new[] { "EmployeeId", "Address", "Color", "DepartmentId", "EmploymentStatus", "End", "ManagerId", "Name", "PhoneNumber", "Photo", "PositionId", "ShiftEnd", "ShiftStart", "Start" },
-                values: new object[] { 3, "103 Fake St", "Pink", 3, 0, null, null, "Alex Honnold", "9192342344", null, 7, new TimeSpan(0, 22, 0, 0, 0), new TimeSpan(0, 12, 0, 0, 0), new DateTime(1996, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 4, "104 Fake St", "Blue", 2, 0, null, 3, "Richard Valenziano", "9192362344", null, 3, new TimeSpan(0, 22, 0, 0, 0), new TimeSpan(0, 12, 0, 0, 0), new DateTime(2021, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
 
             migrationBuilder.InsertData(
                 table: "Employees",

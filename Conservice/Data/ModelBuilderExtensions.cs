@@ -151,7 +151,7 @@ namespace Conservice.Data
                     EmploymentStatus = EmploymentStatusEnum.Active,
                     ShiftStart = new TimeSpan(12, 0, 0),
                     ShiftEnd = new TimeSpan(22, 0, 0),
-                    ManagerId = 4,
+                    ManagerId = 3,
                     Photo = null,
                     Color = "Blue",
                 },
