@@ -130,7 +130,8 @@ Nice Features, to include after you complete the MVP:
 
    Check the notificaitons - DONE
 
-
+   Write a tag helper for changing tabs - DONE
+   Clean up code
 
       Add styles
 

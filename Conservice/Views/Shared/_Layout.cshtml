@@ -22,28 +22,28 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav nav-pills flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link active text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Employees</a>
+                            <a class="nav-link text-dark @Html.IsSelected(actions: null, controllers: "Employee")" asp-area="" asp-controller="Employee" asp-action="Index">Employees</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Index">Departments</a>
+                            <a class="nav-link text-dark @Html.IsSelected(actions: null, controllers: "Department")" asp-area="" asp-controller="Department" asp-action="Index">Departments</a>
                         </li>
                      
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Position" asp-action="Index">Positions</a>
+                            <a class="nav-link text-dark @Html.IsSelected(actions: null, controllers: "Position")" asp-area="" asp-controller="Position" asp-action="Index">Positions</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ActivityLog" asp-action="Index">Activity Log</a>
+                            <a class="nav-link text-dark  @Html.IsSelected(actions: null, controllers: "ActivityLog")" asp-area="" asp-controller="ActivityLog" asp-action="Index">Activity Log</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Metrics" asp-action="Index">Retention Metrics</a>
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark @Html.IsSelected(actions: "Index", controllers: "Metrics")" asp-area="" asp-controller="Metrics" asp-action="Index">Retention Metrics</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Metrics" asp-action="ManagementChainReport">Management Chain</a>
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark @Html.IsSelected(actions: "ManagementChainReport", controllers: "Metrics")" asp-area="" asp-controller="Metrics" asp-action="ManagementChainReport">Management Chain</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Metrics" asp-action="EmployeeCountReport">Employee Count</a>
+                            <a class="nav-link text-dark @Html.IsSelected(actions: "EmployeeCountReport", controllers: "Metrics")" asp-area="" asp-controller="Metrics" asp-action="EmployeeCountReport">Employee Count</a>
                         </li>
                     </ul>
                 </div>
