@@ -412,7 +412,6 @@ C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\bin\Debug
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Employee\AddEmployee.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Employee\Index.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Employee\Permissions.cshtml.g.cs
-C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\Employee\Shared\EmployeeTabs.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\ActivityLog\AddSubscription.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\ActivityLog\Shared\ActivityLogTabs.cshtml.g.cs
 C:\Users\raval\Documents\Projects\conservice-mvc\Conservice\Conservice\obj\Debug\netcoreapp3.0\Razor\Views\ActivityLog\Subscriptions.cshtml.g.cs

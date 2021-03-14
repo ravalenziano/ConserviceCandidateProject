@@ -5,25 +5,26 @@
 }
 @model List<DepartmentViewModel>
 
-<h1>Departments</h1>
+<h1>Departments <a class="btn btn-primary addNewButton" href="@Url.Action("New", "Department")">Add New</a></h1>
 
-<a class="btn btn-primary" href="@Url.Action("New", "Department")">Add New</a>
 
-<table id="departmentTable" class="table table-striped table-bordered" style="width:100%">
-    <thead>
-        <tr>
-            <th>Name</th>
-          
-        </tr>
-    </thead>
-    <tbody>
+<div class="table-responsive">
+    <table id="departmentTable" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
 
-        @foreach (var dep in Model)
-        {
-        <tr>
-            <td>@dep.Name</td>
-   
-        </tr>
-        }
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var dep in Model)
+            {
+                <tr>
+                    <td>@dep.Name</td>
+
+                </tr>
+            }
         </tbody>
-</table>
+    </table>
+    </div>

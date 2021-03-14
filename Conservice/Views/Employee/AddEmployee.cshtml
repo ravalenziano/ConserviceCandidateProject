@@ -7,85 +7,96 @@
 
 @if (Model.EmployeeId != null)
 {
-    @await Html.PartialAsync("./Shared/EmployeeTabs.cshtml")
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link active" href="/Employee/Edit/@Model.EmployeeId">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/Employee/Permissions/@Model.EmployeeId">Permissions</a>
+    </li>
+
+</ul>
 }
 
 
 <h1>Profile</h1>
 <span asp-validation-for="Error" class="text-danger"></span>
-<form method="post" action="/Employee/DeleteEmployee">
-    <input type="hidden" id="id" name="id" value="@Model.EmployeeId">
-    <input type="submit" value="Remove" />
-</form>
+@if (Model.EmployeeId != null)
+{
+    <form method="post" action="/Employee/DeleteEmployee">
+        <input type="hidden" id="id" name="id" value="@Model.EmployeeId">
+        <input class="btn btn-warning removeButton" type="submit" value="Remove" />
+    </form>
+}
 
 <form method="post" enctype="multipart/form-data" action="/Employee/SaveEmployee">
     <input type="hidden" id="EmployeeId" name="EmployeeId" value="@Model.EmployeeId">
     <input type="hidden" id="Photo" name="Photo" value="@Model.Photo">
-    <div>
+    <div class="form-group">
         <label asp-for="Name" class="control-label"> Name:</label>
-        <input asp-for="Name" />
+        <input class="form-control" asp-for="Name" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-    <div>
+    <div class="form-group">
         <label asp-for="Address" class="control-label"> Address:</label>
-        <input asp-for="Address" />
+        <input class="form-control" asp-for="Address" />
         <span asp-validation-for="Address" class="text-danger"></span>
     </div>
-    <div>
+    <div class="form-group">
         <label asp-for="Email" class="control-label"> Email:</label>
-        <input asp-for="Email" />
+        <input class="form-control" asp-for="Email" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
-    <div>
+    <div class="form-group">
         <label asp-for="PhoneNumber" class="control-label"> PhoneNumber:</label>
-        <input asp-for="PhoneNumber" />
+        <input class="form-control" asp-for="PhoneNumber" />
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
 
-    <div>
+    <div class="form-group">
         <label asp-for="PositionId" class="control-label"> Position:</label>
-        <select asp-for="PositionId" asp-items="Model.PositionOptions"></select>
+        <select class="form-control" asp-for="PositionId" asp-items="Model.PositionOptions"></select>
         <span asp-validation-for="PositionId" class="text-danger"></span>
     </div>
 
-    <div>
+    <div class="form-group">
         <label asp-for="DepartmentId" class="control-label"> Department:</label>
-        <select asp-for="DepartmentId" asp-items="Model.DepartmentOptions"></select>
+        <select class="form-control" asp-for="DepartmentId" asp-items="Model.DepartmentOptions"></select>
         <span asp-validation-for="DepartmentId" class="text-danger"></span>
     </div>
 
 
-    <div>
+    <div class="form-group">
         <label asp-for="Start" class="control-label"> Start:</label>
-        <input type="date" asp-for="Start" />
+        <input class="form-control" type="date" asp-for="Start" />
         <span asp-validation-for="Start" class="text-danger"></span>
     </div>
-    <div>
+    <div class="form-group">
         <label asp-for="End" class="control-label"> End:</label>
-        <input type="date" asp-for="End" />
+        <input class="form-control" type="date" asp-for="End" />
         <span asp-validation-for="End" class="text-danger"></span>
     </div>
 
-    <div>
+    <div class="form-group">
         <label asp-for="EmploymentStatus" class="control-label"> Employment Status:</label>
-        <select asp-for="EmploymentStatus" asp-items="Model.EmploymentStatusOptions"></select>
+        <select class="form-control" asp-for="EmploymentStatus" asp-items="Model.EmploymentStatusOptions"></select>
         <span asp-validation-for="EmploymentStatus" class="text-danger"></span>
     </div>
 
-    <div>
+    <div class="form-group">
         <label asp-for="ShiftStart" class="control-label"> ShiftStart:</label>
-        <input type="time" asp-for="ShiftStart" />
+        <input class="form-control" type="time" asp-for="ShiftStart" />
         <span asp-validation-for="ShiftStart" class="text-danger"></span>
     </div>
-    <div>
+    <div class="form-group">
         <label asp-for="ShiftEnd" class="control-label"> ShiftEnd:</label>
-        <input type="time" asp-for="ShiftEnd" />
+        <input class="form-control" type="time" asp-for="ShiftEnd" />
         <span asp-validation-for="ShiftEnd" class="text-danger"></span>
     </div>
 
-    <div>
+    <div class="form-group">
         <label asp-for="ManagerId" class="control-label"> Manager:</label>
-        <select asp-for="ManagerId" asp-items="Model.ManagerOptions"></select>
+        <select class="form-control" asp-for="ManagerId" asp-items="Model.ManagerOptions"></select>
         <span asp-validation-for="ManagerId" class="text-danger"></span>
     </div>
 
@@ -96,20 +107,21 @@
         </div>
     }
 
-    <div>
+    <div class="form-group">
         <label asp-for="PhotoFile">Photo</label>
 
-        <input name="PhotoFile" asp-for="PhotoFile" type="file">
+        <input class="form-control" name="PhotoFile" asp-for="PhotoFile" type="file">
         <span asp-validation-for="PhotoFile"></span>
 
     </div>
-    <div>
+    <div class="form-group">
         <label asp-for="Color" class="control-label"> Color:</label>
-        <input asp-for="Color" />
+        <input class="form-control" asp-for="Color" />
         <span asp-validation-for="Color" class="text-danger"></span>
     </div>
-
-    <input type="submit" />
+    <div class="flex justify-content-end">
+        <input class="btn btn-primary submitButton" type="submit" />
+    </div>
 </form>
 
 

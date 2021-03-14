@@ -134,6 +134,9 @@ Nice Features, to include after you complete the MVP:
 
       Add styles
 
+         --> submit button float right
+          --> Moving nav
+
        Add READ me for email configuration
      
 
