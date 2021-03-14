@@ -17,17 +17,28 @@ namespace Conservice.Services
             _configuration = config;
         }
 
-        public void SendMail(string subject, string body, string recipients)
+        public async void SendMail(string subject, string body, string recipients)
         {
            var section = _configuration.GetSection("Emails");
-            var smtpClient = new SmtpClient(section["SmtpClient"])
-            {
-                Port = 587,
-                Credentials = new NetworkCredential(section["Username"], section["Password"]),
-                EnableSsl = true,
-            };
 
-            smtpClient.Send(section["FromEmail"], recipients, subject, body);
+            using (var message = new MailMessage())
+            {
+                message.To.Add(recipients);
+
+                message.Subject = subject;
+                message.Body = body;
+                message.From = new MailAddress(section["FromEmail"]);
+
+                using (var smtpClient = new SmtpClient(section["SmtpClient"])
+                {
+                    Port = 587,
+                    Credentials = new NetworkCredential(section["Username"], section["Password"]),
+                    EnableSsl = true,
+                })
+                {
+                    await smtpClient.SendMailAsync(message);
+                }
+            }
         }
     }
 }

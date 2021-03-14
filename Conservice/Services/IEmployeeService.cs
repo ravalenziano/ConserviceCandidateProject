@@ -52,5 +52,7 @@ namespace Conservice.Services
 
         bool EmployeeEmailExists(string email, int employeeId);
 
+        bool EmployeeIsManager(int id);
+
     }
 }

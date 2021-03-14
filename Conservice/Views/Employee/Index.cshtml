@@ -38,8 +38,8 @@
             <td>@employee.PhoneNumber</td>
             <td>@employee.PositionName</td>
             <td>@employee.DepartmentName</td>
-            <td>@employee.Start</td>
-            <td>@employee.End</td>
+            <td>@employee.StartStr</td>
+            <td>@employee.EndStr</td>
             <td>@employee.EmploymentStatusString</td>
             <td>@employee.ShiftStart - @employee.ShiftEnd</td>
             <td>@(employee.ManagerName != null ? employee.ManagerName : "" )</td>
@@ -74,7 +74,8 @@
                     }
                 });
             });
-
+            //MM/dd/yyyy
+            $.fn.dataTable.moment('MM/dd/yyyy');
             var table = $('#employeeTable').DataTable({
                 orderCellsTop: true,
                 fixedHeader: true,

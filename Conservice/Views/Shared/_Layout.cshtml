@@ -44,8 +44,8 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Metrics" asp-action="EmployeeCountReport">Employee Count</a>
                         </li>
                         @*<li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Subscriptions">Subscriptions</a>
-        </li>*@
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Subscriptions">Subscriptions</a>
+                            </li>*@
                     </ul>
                 </div>
             </div>
@@ -59,13 +59,15 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - Conservice 
+            &copy; 2021 - Conservice
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.24/sorting/datetime-moment.js"></script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

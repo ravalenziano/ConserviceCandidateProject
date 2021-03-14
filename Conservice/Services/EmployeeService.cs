@@ -202,6 +202,12 @@ namespace Conservice.Services
             }
         }
 
+        public bool EmployeeIsManager(int id)
+        {
+
+            return _context.Employees.Any(x => x.ManagerId == id);
+        }
+
         private void updateEmployee(Employee existing, Employee newData)
         {
             existing.Name = newData.Name;
@@ -289,6 +295,8 @@ namespace Conservice.Services
 
                 };
                 changeList.Add(changeEvt);
+
+                SendAlerts(changeEvt);
             }
             return changeList;
         }

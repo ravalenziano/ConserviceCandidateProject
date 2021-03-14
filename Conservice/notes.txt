@@ -122,17 +122,19 @@ Nice Features, to include after you complete the MVP:
     Refactor to SaveEmployee (Addemployee, Editemployee)
     Email regex - DONE
    
- 
+     Date field sort in datatables - DONE
 
-   Add styles
+     Activity log   Terminated should also have a end date - DONE
+     Status change email - DONE
+     async email - performance - DONE
 
-      Add READ me for email configuration
+   Check the notificaitons - DONE
 
-      terminated should also set end date
 
-      Date field sort in datatables
 
-   Activity log   Terminated should also have a end date
+      Add styles
+
+       Add READ me for email configuration
      
 
     

@@ -34,7 +34,19 @@ namespace Conservice.Models
         public string DepartmentName { get; set; }
 
         public DateTime Start { get; set; }
+
+        public string StartStr { get
+            {
+                return Start.ToString("MM/dd/yyyy");
+            } }
         public DateTime? End { get; set; }
+        public string EndStr
+        {
+            get
+            {
+                return End.HasValue ? End.Value.ToString("MM/dd/yyyy") : "";
+            }
+        }
         public EmploymentStatusEnum EmploymentStatus { get; set; }
 
         public String EmploymentStatusString { get
@@ -56,6 +68,8 @@ namespace Conservice.Models
         public IFormFile PhotoFile { get; set; }
 
         public string Color { get; set; }
+
+        public string Error { get; set; }
 
 
         public List<SelectListItem> PositionOptions { get; set; }

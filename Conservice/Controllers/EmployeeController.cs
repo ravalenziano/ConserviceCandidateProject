@@ -47,6 +47,21 @@ namespace Conservice.Controllers
 
         public IActionResult DeleteEmployee(int id)
         {
+
+            if (_employeeService.EmployeeIsManager(id))
+            {
+                ModelState.AddModelError("Error", "Can't delete employee that is currently managing other employees.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                var employee = _employeeService.GetEmployee(id);
+                var positionOptions = _employeeService.GetPositions();
+                var departmentOptions = _employeeService.GetDepartments();
+                var managerOptions = _employeeService.GetEmployees();
+                var model = new EmployeeViewModel(positionOptions, departmentOptions, managerOptions, employee);
+                return View("AddEmployee", model);
+            }
             _employeeService.DeleteEmployee(id);
             return RedirectToAction("Index");
         }
@@ -83,6 +98,12 @@ namespace Conservice.Controllers
              ))
             {
                 ModelState.AddModelError("Email", "Email already exists.");
+            }
+
+            if(model.EmploymentStatus == EmploymentStatusEnum.Terminated &&
+                model.End == null)
+            {
+                ModelState.AddModelError("EmploymentStatus", "Terminated employee must have an end date.");
             }
 
 

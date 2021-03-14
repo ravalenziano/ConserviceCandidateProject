@@ -1,12 +1,26 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+    EmployeeChangeEventTypeEnum:
+    PermissionChange,
+        ManagerChange,
+        PositionChange,
+       StatusChange*@
 @{
+
 }
 
 @model Conservice.Models.ActivityLogViewModel
 
 <h1>Activity Log</h1>
+
+<p>
+    Activities tracked:
+    <ul>
+        <li>Permission Change</li>
+        <li>Manager Change</li>
+        <li>Position Change</li>
+        <li>Status Change</li>
+    </ul>
+</p>
 
 @await Html.PartialAsync("./Shared/ActivityLogTabs.cshtml")
 
