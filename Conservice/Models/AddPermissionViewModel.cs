@@ -16,11 +16,13 @@ namespace Conservice.Models
 
         public int EmployeeId { get; set; }
 
-      //  public int PermissionSelection { get; set; }
+        public string EmployeeName { get; set; }
 
-        public PermissionsViewModel(int employeeId, List<EmployeePermissionViewModel> currentPermissions)
+
+        public PermissionsViewModel(int employeeId, string employeeName, List<EmployeePermissionViewModel> currentPermissions)
         {
             EmployeeId = employeeId;
+            EmployeeName = employeeName;
             CurrentPermissions = currentPermissions;
             InitOptions();
         }

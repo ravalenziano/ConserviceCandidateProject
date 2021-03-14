@@ -237,8 +237,9 @@ namespace Conservice.Controllers
 
         public IActionResult Permissions(int id)
         {
+           var employee = _employeeService.GetEmployee(id);
             var permissions = _employeeService.GetPermissions(id);
-            var model = new PermissionsViewModel(id, permissions);
+            var model = new PermissionsViewModel(id, employee.Name, permissions);
             return View(model);
         }
 
