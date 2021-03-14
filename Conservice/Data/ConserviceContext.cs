@@ -43,10 +43,6 @@ namespace Conservice.Data
             .HasForeignKey(s => s.DepartmentId)
             .OnDelete(DeleteBehavior.NoAction);
 
-            //modelBuilder.Entity<EmployeeChangeEvent>().HasOne(s => s.Employee)
-            //.WithMany()
-            //.OnDelete(DeleteBehavior.Cascade);
-
 
             modelBuilder.Seed();
         }

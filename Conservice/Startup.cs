@@ -41,16 +41,6 @@ namespace Conservice
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-
-            //services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
-            //{
-            //    var libraryPath = Path.GetFullPath(
-            //        Path.Combine(HostEnvironment.ContentRootPath, "..", "MyClassLib"));
-            //    options.FileProviders.Add(new PhysicalFileProvider(libraryPath));
-            //});
-            //   .AddRazorPagesOptions();
-            //  services.AddMvc().AddRazorRuntimeCompilation();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

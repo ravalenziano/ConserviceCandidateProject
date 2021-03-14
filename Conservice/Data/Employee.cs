@@ -57,7 +57,6 @@ namespace Conservice.Data
         [InverseProperty("Employee")]
         public virtual ICollection<EmployeePermission> Permissions { get; set; }
 
-        // public virtual ICollection<Employee> Subordinates { get; set; }
 
     }
 }

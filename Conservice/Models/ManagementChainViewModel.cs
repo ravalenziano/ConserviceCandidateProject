@@ -20,34 +20,7 @@ namespace Conservice.Models
         {
             TreeList = tree;
         }
-        //public ManagementChainViewModel FromEmployees(List<Employee> employees)
-        //{
-        //    List<EmployeeNodeTree> list = new List<EmployeeNodeTree>();
-        //    Dictionary<int, EmployeeNode> employeeMap = new Dictionary<int, EmployeeNode>();
 
-        //    foreach(var emp in employees)
-        //    {
-        //        EmployeeNode node = new EmployeeNode(emp);
-
-        //        //If manager has already been added to a tree, add employee as a child
-        //        if (emp.ManagerId.HasValue && employeeMap.ContainsKey(emp.ManagerId.Value))
-        //        {
-        //            employeeMap[emp.ManagerId.Value].Children.Add(node);
-
-        //        }
-        //        else
-        //        {
-        //            //Otherwise add topmost manager first
-        //            EmployeeNode managerNode = new EmployeeNode(emp.)
-        //        }
-
-
-
-
-        //        employeeMap[emp.EmployeeId] = node;
-        //    }
-            
-        //}
     }
 
 

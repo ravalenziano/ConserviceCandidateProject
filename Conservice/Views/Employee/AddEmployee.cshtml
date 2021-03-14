@@ -19,7 +19,7 @@
 }
 
 
-<h1>Profile - @Model.Name</h1>
+<h1>Profile @(Model.Name == null ? "" : "- " + Model.Name)</h1>
 <span asp-validation-for="Error" class="text-danger"></span>
 @if (Model.EmployeeId != null)
 {

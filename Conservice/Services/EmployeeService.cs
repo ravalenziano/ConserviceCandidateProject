@@ -153,7 +153,6 @@ namespace Conservice.Services
 
         private string getRandomFilePath(IFormFile file,string rootPath, string fileName)
         {
-           // var fileName = getRandomFileName(file);
             var filePath = Path.Combine(rootPath, "images", fileName);
             return filePath;
         }
@@ -161,14 +160,8 @@ namespace Conservice.Services
         private string getRandomFileName(IFormFile file)
         {
             var ext = Path.GetExtension(file.FileName);
-            //  String rootPath = _hostEnv.WebRootPath;
             return string.Format(@"{0}{1}", Guid.NewGuid(), ext);
         }
-
-        //private string getRandomFileName(string fileExtension)
-        //{
-        //    return string.Format(@"{0}{1}", Guid.NewGuid(), fileExtension); 
-        //}
 
         public void SaveEmployee(Employee employee)
         {

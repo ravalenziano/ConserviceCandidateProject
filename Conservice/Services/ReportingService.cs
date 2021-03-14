@@ -13,12 +13,9 @@ namespace Conservice.Services
     public class ReportingService : IReportingService
     {
         readonly ConserviceContext _context;
-    //    private readonly IEmployeeService _employeeService;
         public ReportingService(ConserviceContext context)
         {
             _context = context;
-         
-            
         }
         public List<TerminatedReportViewModel> TerminatedReport()
         {
@@ -38,7 +35,6 @@ namespace Conservice.Services
 
         public List<HireReportViewModel> HireReport()
         {
-            //TODO Fix, this only works for one week
             List<HireReportViewModel> list = _context.Employees.ToList()
                 .GroupBy(e => yearWeekProjector(e.Start))
                 .Select(x => new HireReportViewModel(
@@ -172,26 +168,7 @@ namespace Conservice.Services
 
         public List<DepartmentCountViewModel> EmployeeCountByDepartment()
         {
-           
-            //var asdfds = _employeeService.GetEmployees();
-            //List<EmployeeViewModel> employees = _context.Employees
-            //.Include(x => x.Position)
-            //.Include(x => x.Department)
-            //.Include(x => x.Manager)
-            //.ToList()
-            //.Select(x => new EmployeeViewModel(x)).ToList();
-            
-            var test = _context.Employees
-                .Include(x => x.Department)
-                .Include(x => x.Department).ToList();
 
-
-            var test2 = _context.Employees.ToList();
-
-            var dep = test2[0].Department;
-
-
-            //     ;// .GroupBy(x => x.Department).ToList();
             List<DepartmentCountViewModel>  departmentList = _context.Employees.Include(x => x.Department).ToList()
                 .GroupBy(x => x.Department)
                 .Select(x => new DepartmentCountViewModel(x.Key.Name, x.Count())).ToList();
