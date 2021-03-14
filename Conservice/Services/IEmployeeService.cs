@@ -50,5 +50,7 @@ namespace Conservice.Services
 
         void RemovePosition(int id);
 
+        bool EmployeeEmailExists(string email, int employeeId);
+
     }
 }

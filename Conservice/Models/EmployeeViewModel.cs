@@ -14,22 +14,25 @@ namespace Conservice.Models
         public int? EmployeeId { get; set; }
         [Required]
         public string Name { get; set; }
+        
         public string Address { get; set; }
 
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
+        [Phone]
         public string PhoneNumber { get; set; }
  
         [Required]
         public int PositionId { get; set; }
 
         public string PositionName { get; set; }
-       // public PositionViewModel Position { get; set; }
 
         [Required]
         public int DepartmentId { get; set; }
 
         public string DepartmentName { get; set; }
-       // public DepartmentViewModel Department { get; set; }
+
         public DateTime Start { get; set; }
         public DateTime? End { get; set; }
         public EmploymentStatusEnum EmploymentStatus { get; set; }
@@ -48,25 +51,22 @@ namespace Conservice.Models
         public string Photo { get; set; }
 
 
-
+        [MaxFileSize(5 * 1024 * 1024)]
+        [AllowedExtensions(new string[] { ".jpg", ".png" })]
         public IFormFile PhotoFile { get; set; }
 
         public string Color { get; set; }
 
 
-   
-    //    public int SelectedPosition { get; set; }
         public List<SelectListItem> PositionOptions { get; set; }
    
-     //   public int SelectedDepartment { get; set; }
+
         public List<SelectListItem> DepartmentOptions { get; set; }
-      //  public int SelectedManager { get; set; }
+
 
         public List<SelectListItem> ManagerOptions { get; set; }
-
+        
         public List<SelectListItem> EmploymentStatusOptions { get; set; }
-
-
 
         public Employee ToEmployee()
         {
@@ -97,13 +97,15 @@ namespace Conservice.Models
             List<DepartmentViewModel> departmentOptions, List<EmployeeViewModel> managerOptions, Employee employee = null)
 
         {
+            this.Start = DateTime.Now;
+
             if (employee != null)
             {
                 initEmployeeData(employee);
             }
             this.InitOptions(positionOptions, departmentOptions, managerOptions);
 
-            this.Start = DateTime.Now;
+           
 
            
         }
@@ -151,8 +153,8 @@ namespace Conservice.Models
 
             ManagerOptions.Add(new SelectListItem("None", "", ManagerId == null));
 
-            managerOptions.Select(x => new SelectListItem(x.Name, x.EmployeeId.ToString(),
-                x.ManagerId == ManagerId)).ToList().ForEach(elem =>
+            managerOptions.Where(x => EmployeeId != x.EmployeeId).Select(x => new SelectListItem(x.Name, x.EmployeeId.ToString(),
+                x.EmployeeId == ManagerId)).ToList().ForEach(elem =>
                 {
                     ManagerOptions.Add(elem);
                 });

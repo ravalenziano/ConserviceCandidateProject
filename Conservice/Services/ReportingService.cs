@@ -69,6 +69,37 @@ namespace Conservice.Services
             return new ManagementChainViewModel(tree);
         }
 
+        //Determine if adding this employee will cause a manager cycle
+        public bool WillContainCycles(int employeeId, int? managerId)
+        {
+            if(managerId == null)
+            {
+                return false;
+            }
+            if(employeeId == managerId)
+            {
+                return true;
+            }
+
+            var manager = _context.Employees.FirstOrDefault(x => x.EmployeeId == managerId);
+
+            while(manager != null && manager.ManagerId != null)
+            {
+                if(manager.EmployeeId == employeeId)
+                {
+                    //Cycle detected
+                    return true;
+                }
+                manager = _context.Employees.FirstOrDefault(x => x.EmployeeId == manager.ManagerId);
+            }
+            if (manager.EmployeeId == employeeId)
+            {
+                //Cycle detected
+                return true;
+            }
+            return false;
+        }
+
         public List<EmployeeNodeTree> GetEmployeeNodeTree()
         {
             List<Employee> employees = _context.Employees.ToList();

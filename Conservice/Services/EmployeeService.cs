@@ -96,6 +96,12 @@ namespace Conservice.Services
 
         public List<EmployeeViewModel> GetEmployees()
         {
+            var asdfdsa = _context.Employees.ToList();
+            var test =  _context.Employees
+                 .Include(x => x.Position)
+                 .Include(x => x.Department)
+                 .Include(x => x.Manager)
+                 .ToList();
             List<EmployeeViewModel> employees = _context.Employees
                 .Include(x => x.Position)
                 .Include(x => x.Department)
@@ -232,7 +238,7 @@ namespace Conservice.Services
                 var changeEvt = new EmployeeChangeEvent
                 {
                     EmployeeId = existing.EmployeeId,
-                    Old = oldManager.Name,
+                    Old = oldManager == null ? "" : oldManager.Name,
                     New = newManager == null ? "" : newManager.Name,
                     Time = time,
                     ChangeEventType = changeType,
@@ -408,6 +414,12 @@ namespace Conservice.Services
                 .Include(x => x.Employee).ToList()
                 .Select(x => new SubscriptionViewModel(x, employeeOptions)).ToList();
             return list;
+        }
+
+        public bool EmployeeEmailExists(string email, int employeeId)
+        {
+           
+            return _context.Employees.Any(x => x.Email == email && employeeId != x.EmployeeId);
         }
 
      

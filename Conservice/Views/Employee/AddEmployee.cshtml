@@ -43,11 +43,13 @@
     <div>
         <label asp-for="PositionId" class="control-label"> Position:</label>
         <select asp-for="PositionId" asp-items="Model.PositionOptions"></select>
+        <span asp-validation-for="PositionId" class="text-danger"></span>
     </div>
 
     <div>
         <label asp-for="DepartmentId" class="control-label"> Department:</label>
         <select asp-for="DepartmentId" asp-items="Model.DepartmentOptions"></select>
+        <span asp-validation-for="DepartmentId" class="text-danger"></span>
     </div>
 
 
@@ -65,6 +67,7 @@
     <div>
         <label asp-for="EmploymentStatus" class="control-label"> Employment Status:</label>
         <select asp-for="EmploymentStatus" asp-items="Model.EmploymentStatusOptions"></select>
+        <span asp-validation-for="EmploymentStatus" class="text-danger"></span>
     </div>
 
     <div>
@@ -81,23 +84,15 @@
     <div>
         <label asp-for="ManagerId" class="control-label"> Manager:</label>
         <select asp-for="ManagerId" asp-items="Model.ManagerOptions"></select>
+        <span asp-validation-for="ManagerId" class="text-danger"></span>
     </div>
-
-    @*<div>
-            <label asp-for="Photo" class="control-label"> Photo:</label>
-            <input asp-for="Photo" />
-            <span asp-validation-for="Photo" class="text-danger"></span>
-        </div>*@
 
     @if (Model.Photo != null)
     {
-<div>
-    <img height="150" src="~/images/@Model.Photo" />
-</div>
-
-        
+        <div>
+            <img height="150" src="~/images/@Model.Photo" />
+        </div>
     }
-
 
     <div>
         <label asp-for="PhotoFile">Photo</label>

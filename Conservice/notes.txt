@@ -111,15 +111,20 @@ Nice Features, to include after you complete the MVP:
              Change name of home controller to employee controller - DONE
 
                  Remove permissions tab for add noew - DONE
+     Add subscriptions tab to activity log - DONE
+
+        Display photo in profile - DONE
+
+          Validate loops in employees - DONE
+
+    Unique email validatoin for Employees - DONE
+
+    Refactor to SaveEmployee (Addemployee, Editemployee)
+    Email regex - DONE
+   
  
 
-    Validate loops in employees
-
-    Display photo in profile
-
-    Add subscriptions tab to activity log
-
-     Add styles
+   Add styles
 
       Add READ me for email configuration
 

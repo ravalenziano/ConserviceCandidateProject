@@ -1,4 +1,5 @@
-﻿using Conservice.Models;
+﻿using Conservice.Data;
+using Conservice.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace Conservice.Services
         ManagementChainViewModel ManagementChainReport();
 
         EmployeeCountViewModel EmployeeCountReport();
+
+        bool WillContainCycles(int employeeId, int? managerId);
     }
 }

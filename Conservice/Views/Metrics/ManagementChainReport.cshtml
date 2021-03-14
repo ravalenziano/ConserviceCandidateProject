@@ -6,7 +6,7 @@
 
 @model Conservice.Models.ManagementChainViewModel
 
-<h1>Management Chain Report</h1>
+<h1>Management Chain</h1>
 @foreach (var tree in Model.TreeList)
 {
     @Html.Raw(tree.ToHtmlElement());

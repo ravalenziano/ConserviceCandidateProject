@@ -20,11 +20,14 @@ namespace Conservice.Controllers
 
         private readonly IEmployeeService _employeeService;
         private readonly IWebHostEnvironment _hostEnv;
+        private readonly IReportingService _reportingService;
 
-        public EmployeeController(IEmployeeService employeeService, IWebHostEnvironment  hostEnv)
+        public EmployeeController(IEmployeeService employeeService, IWebHostEnvironment  hostEnv,
+             IReportingService reportingService)
         {
             _employeeService = employeeService;
             _hostEnv = hostEnv;
+            _reportingService = reportingService;
         }
 
         public IActionResult Index()
@@ -68,6 +71,21 @@ namespace Conservice.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EmployeeViewModel model)
         {
+            if (model.EmployeeId.HasValue &&_reportingService.WillContainCycles(model.EmployeeId.Value, model.ManagerId))
+            {
+                //ERROR
+                ModelState.AddModelError("ManagerId", "Manager cycle detected. Manager A --> Manager B --> Manager C --> Manager A");
+            }
+
+            if (model.Email != null &&
+             _employeeService.EmployeeEmailExists(model.Email,
+                 model.EmployeeId.HasValue ? model.EmployeeId.Value : 0
+             ))
+            {
+                ModelState.AddModelError("Email", "Email already exists.");
+            }
+
+
             if (!ModelState.IsValid)
             {
                 var positionOptions = _employeeService.GetPositions();
@@ -77,9 +95,9 @@ namespace Conservice.Controllers
                 return View("AddEmployee", model);
             }
 
-
-            // Employee  employee = _employeeService.GetEmployee(model.EmployeeId.Value);
             Employee employee = model.ToEmployee();
+            // Employee  employee = _employeeService.GetEmployee(model.EmployeeId.Value);
+
             _employeeService.SaveEmployee(employee);
 
             //Upload file
@@ -89,6 +107,7 @@ namespace Conservice.Controllers
                 //string filePath = getRandomFilePath(model.PhotoFile);
                 await _employeeService.UploadEmployeeFile(employee.EmployeeId,
                     _hostEnv.WebRootPath, model.PhotoFile);
+
             }
 
 
@@ -98,6 +117,18 @@ namespace Conservice.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEmployee(EmployeeViewModel model)
         {
+            if (model.EmployeeId.HasValue && _reportingService.WillContainCycles(model.EmployeeId.Value, model.ManagerId))
+            {
+                //ERROR
+                ModelState.AddModelError("ManagerId", "Manager cycle detected. Manager A --> Manager B --> Manager C --> Manager A");
+            }
+            if (model.Email != null && 
+                _employeeService.EmployeeEmailExists(model.Email,
+                    model.EmployeeId.HasValue ? model.EmployeeId.Value : 0
+                ))
+            {
+                ModelState.AddModelError("Email", "Email already exists.");
+            }
             if (!ModelState.IsValid)
             {
                 var positionOptions = _employeeService.GetPositions();
@@ -109,7 +140,6 @@ namespace Conservice.Controllers
             Employee employee;
         
                 employee = model.ToEmployee();
-            
 
             _employeeService.SaveEmployee(employee);
 
