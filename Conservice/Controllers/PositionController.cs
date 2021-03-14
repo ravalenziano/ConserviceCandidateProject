@@ -41,5 +41,11 @@ namespace Conservice.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult RemovePosition(int id)
+        {
+            _employeeService.RemovePosition(id);
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -103,6 +103,8 @@ namespace Conservice.Models
             }
             this.InitOptions(positionOptions, departmentOptions, managerOptions);
 
+            this.Start = DateTime.Now;
+
            
         }
 

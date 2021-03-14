@@ -54,6 +54,16 @@ namespace Conservice.Services
             _context.SaveChanges();
         }
 
+        public void RemovePosition(int id)
+        {
+            var pos = _context.Positions.FirstOrDefault(x => x.PositionId == id);
+            if(pos != null)
+            {
+                _context.Remove(pos);
+                _context.SaveChanges();
+            }
+        }
+
         public List<DepartmentViewModel> GetDepartments()
         {
             List<DepartmentViewModel> departments = _context.Departments.ToList()
@@ -72,6 +82,16 @@ namespace Conservice.Services
         {
             _context.Add(department);
             _context.SaveChanges();
+        }
+
+        public void RemoveDepartment(int id)
+        {
+            var dep = _context.Departments.FirstOrDefault(x => x.DepartmentId == id);
+            if (dep != null)
+            {
+                _context.Remove(dep);
+                _context.SaveChanges();
+            }
         }
 
         public List<EmployeeViewModel> GetEmployees()
@@ -347,7 +367,7 @@ namespace Conservice.Services
         private string alertEmailBody(EmployeeChangeEvent changeEvent, string employeeName)
         {
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine("Employee Change: ");
+            builder.AppendLine("Change Type: " + changeEvent.ChangeEventType.ToString());
             builder.AppendLine("Employee " + employeeName);
             builder.AppendLine("Old: " + changeEvent.Old);
             builder.AppendLine("New: " + changeEvent.New);

@@ -46,5 +46,9 @@ namespace Conservice.Services
 
         List<EmployeeViewModel> GetSubscriptionOptions();
 
+        void RemoveDepartment(int id);
+
+        void RemovePosition(int id);
+
     }
 }

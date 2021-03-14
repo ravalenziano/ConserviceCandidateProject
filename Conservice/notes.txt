@@ -86,27 +86,36 @@ Nice Features, to include after you complete the MVP:
           --> List<Employees>
 
 
-    ●   A notification system that alerts certain users when changes are made within the system. - ACCOUNTED - somewhat routine
+    ●   A notification system that alerts certain users when changes are made within the system. - ACCOUNTED - DONE
 
-    Terminated should take the end date
+    Terminated should take the end date - SKIP
        --> add some validation for this
 
-    Date dropdown should initalize today
+           Debug the eager loading bug - SKIP
 
-    File upload validation
+    File upload validation - SKIP
 
+    https://blog.elmah.io/how-to-send-emails-from-csharp-net-the-definitive-tutorial/
+
+  
+    Email configuration to appsettings.json - DONE
+
+    Date dropdown should initalize today - DONE
 
     TODO Dropdowns not selecting properly - DONE
+
+      Add remove button to positions and departments  - SKIP
+
+
+
 
     Dropdown for selecting appropriate filters
 
     Validate loops in employees
 
-    Debug the eager loading bug
+    Change name of home controller to employee controller
 
+      Add READ me for email configuration
 
-    https://blog.elmah.io/how-to-send-emails-from-csharp-net-the-definitive-tutorial/
+      Add styles
 
-    Add READ me for email configuration
-
-    Email configuration to appsettings.json - DONE
