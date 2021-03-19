@@ -36,7 +36,7 @@ namespace Conservice.Services
                     EnableSsl = true,
                 })
                 {
-                    await smtpClient.SendMailAsync(message);
+                  //  await smtpClient.SendMailAsync(message);
                 }
             }
         }

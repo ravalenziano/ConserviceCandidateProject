@@ -96,65 +96,177 @@ namespace Conservice.Services
             return false;
         }
 
+        public Employee GetTopLevelManager(Employee employee)
+        {
+            if(employee.ManagerId == null)
+            {
+                return null;
+            }
+            var manager = this._context.Employees.FirstOrDefault(x => x.EmployeeId == employee.ManagerId.Value);
+
+            while(manager.ManagerId != null)
+            {
+                manager = this._context.Employees.FirstOrDefault(x => x.EmployeeId == employee.ManagerId.Value);
+            }
+
+            return manager;
+        }
+
+        /// <summary>
+        /// Get a stack of employees, starting with the employee passed in and ending with the topmost manager
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <param name="employeeList"></param>
+        /// <returns></returns>
+        private Stack<EmployeeNode> getEmployeeStack(Employee emp, List<Employee> employeeList)
+        {
+            Stack<EmployeeNode> nodeStack = new Stack<EmployeeNode>();
+            EmployeeNode node = new EmployeeNode(emp);
+            nodeStack.Push(node);
+            Employee current = emp;
+
+            while (current.ManagerId.HasValue)
+            {
+                current = employeeList.FirstOrDefault(x => x.EmployeeId == current.ManagerId.Value);
+                EmployeeNode managerNode = new EmployeeNode(current);
+                nodeStack.Push(managerNode);
+            }
+            return nodeStack;
+        }
+
+        /// <summary>
+        /// Get a tree of employees for each employee with null ManagerId
+        /// </summary>
+        /// <returns></returns>
         public List<EmployeeNodeTree> GetEmployeeNodeTree()
         {
             List<Employee> employees = _context.Employees.ToList();
-
             List<EmployeeNodeTree> list = new List<EmployeeNodeTree>();
             Dictionary<int, EmployeeNode> employeeMap = new Dictionary<int, EmployeeNode>();
 
-            foreach (var emp in employees)
+            foreach(var emp in employees)
             {
-                EmployeeNode node = new EmployeeNode(emp);
+                
                 if (employeeMap.ContainsKey(emp.EmployeeId))
                 {
+                    //Node has already been added so no action needed
                     continue;
                 }
-                //If manager has already been added to a tree, add employee as a child
-                if (emp.ManagerId.HasValue && employeeMap.ContainsKey(emp.ManagerId.Value))
+
+                // Get a stack of employees, starting with the employee passed in and ending with the topmost manager
+                Stack<EmployeeNode> employeeStack = getEmployeeStack(emp, employees);
+
+
+                //Get topmost manager
+                EmployeeNode current = employeeStack.Pop();
+
+                if (!employeeMap.ContainsKey(current.EmployeeId))
                 {
-                    employeeMap[emp.ManagerId.Value].Children.Add(node);
-                    employeeMap[emp.EmployeeId] = node;
+                    //If topmost manager is not already added, create a new tree
+                    list.Add(new EmployeeNodeTree
+                    {
+                        root = current
+                    }
+                    );
+                    //Add empty node to map
+                    employeeMap[current.EmployeeId] = current;
                 }
                 else
                 {
-                    Stack<EmployeeNode> nodeStack = new Stack<EmployeeNode>();
-                    nodeStack.Push(node);
-
-                    Employee current = emp;
-
-                    while (current.ManagerId.HasValue)
-                    {
-                        current = this._context.Employees.FirstOrDefault(x => x.EmployeeId == current.ManagerId.Value);
-                        EmployeeNode managerNode = new EmployeeNode(current);
-                        nodeStack.Push(managerNode);
-                    }
-
-
-                    EmployeeNodeTree tree = new EmployeeNodeTree
-                    {
-                        root = nodeStack.Pop()
-                    };
-                    var currentNode = tree.root;
-
-                    employeeMap[emp.EmployeeId] = node;
-                    employeeMap[currentNode.EmployeeId] = currentNode;
-
-                    while (nodeStack.Count > 0)
-                    {
-                        var stackNode = nodeStack.Pop();
-                        currentNode.Children.Add(stackNode);
-                        employeeMap[currentNode.EmployeeId] = currentNode;
-
-                        currentNode = stackNode;
-                    }
-                    list.Add(tree);
+                    //Current node already exists in a tree so use that instead of empty one
+                    current = employeeMap[current.EmployeeId];
                 }
 
-               
+                EmployeeNode currentManager = current;
+
+                while (employeeStack.Count > 0)
+                {
+                    current = employeeStack.Pop();
+                    if (!employeeMap.ContainsKey(current.EmployeeId))
+                    {
+                        //Add empty node to map
+                        employeeMap[current.EmployeeId] = current;
+                    }
+                    else
+                    {
+                        //Current node already exists in a tree so use that instead of empty one
+                        current = employeeMap[current.EmployeeId];
+                    }
+
+                    //If manager does not already have this employee as a child, add it.
+                    if (!currentManager.Children.Any(x => x.EmployeeId == current.EmployeeId))
+                    {
+                        currentManager.Children.Add(current);
+                    }
+
+                    currentManager = current;
+                }
             }
             return list;
         }
+
+
+        //    public List<EmployeeNodeTree> GetEmployeeNodeTree()
+        //{
+        //    List<Employee> employees = _context.Employees.ToList();
+
+        //    List<EmployeeNodeTree> list = new List<EmployeeNodeTree>();
+        //    Dictionary<int, EmployeeNode> employeeMap = new Dictionary<int, EmployeeNode>();
+
+        //    foreach (var emp in employees)
+        //    {
+        //        EmployeeNode node = new EmployeeNode(emp);
+        //        if (employeeMap.ContainsKey(emp.EmployeeId))
+        //        {
+        //            continue;
+        //        }
+        //        //If manager has already been added to a tree, add employee as a child
+
+        //        Employee topLevelManager = GetTopLevelManager(emp);
+        //        if (emp.ManagerId.HasValue && employeeMap.ContainsKey(topLevelManager.ManagerId.Value))
+        //        {
+        //            employeeMap[emp.ManagerId.Value].Children.Add(node);
+        //            employeeMap[emp.EmployeeId] = node;
+        //        }
+        //        else
+        //        {
+        //            Stack<EmployeeNode> nodeStack = new Stack<EmployeeNode>();
+        //            nodeStack.Push(node);
+
+        //            Employee current = emp;
+
+        //            while (current.ManagerId.HasValue)
+        //            {
+        //                current = this._context.Employees.FirstOrDefault(x => x.EmployeeId == current.ManagerId.Value);
+        //                EmployeeNode managerNode = new EmployeeNode(current);
+        //                nodeStack.Push(managerNode);
+        //            }
+
+
+        //            EmployeeNodeTree tree = new EmployeeNodeTree
+        //            {
+        //                root = nodeStack.Pop()
+        //            };
+        //            var currentNode = tree.root;
+
+        //            employeeMap[emp.EmployeeId] = node;
+        //            employeeMap[currentNode.EmployeeId] = currentNode;
+
+        //            while (nodeStack.Count > 0)
+        //            {
+        //                var stackNode = nodeStack.Pop();
+        //                currentNode.Children.Add(stackNode);
+        //                employeeMap[currentNode.EmployeeId] = currentNode;
+
+        //                currentNode = stackNode;
+        //            }
+        //            list.Add(tree);
+        //        }
+
+               
+        //    }
+        //    return list;
+        //}
 
         public EmployeeCountViewModel EmployeeCountReport()
         {
